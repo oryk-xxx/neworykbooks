@@ -9,8 +9,8 @@ export async function POST(request: Request) {
         const cookieStore = cookies();
         const pendingEmail = cookieStore.get('mfa_pending_email')?.value;
 
-        if (!pin || pin.length !== 6) {
-            return NextResponse.json({ error: 'PIN inválido' }, { status: 400 });
+        if (!pin || pin.length !== 8) {
+            return NextResponse.json({ error: 'PIN inválido (deve ter 8 dígitos)' }, { status: 400 });
         }
 
         if (!pendingEmail) {
