@@ -66,7 +66,9 @@ export async function POST(request: Request) {
 
         if (profileError) {
             console.error("Profile error", profileError);
-            // Ignorando erros se o trigger já criou, apenas atualizamos
+            // Revert auth user creation if profile fails to keep DB consistent
+            await supabaseAdmin.auth.admin.deleteUser(authData.user.id);
+            return NextResponse.json({ error: `Falha ao criar perfil: ${profileError.message}` }, { status: 500 });
         }
 
         return NextResponse.json({ success: true, message: 'Conta criada com sucesso!' });
