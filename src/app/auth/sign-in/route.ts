@@ -1,31 +1,40 @@
+// app/auth/sign-in/route.ts
 import { NextResponse } from "next/server";
-import { z } from "zod";
-import { createSupabaseRouteHandlerClient } from "../../../lib/supabaseServer";
+import { createClient } from "@supabase/supabase-js";
 
-const bodySchema = z.object({
-  email: z.string().email()
-});
+export async function POST(req: Request) {
+  const formData = await req.formData();
+  const email = String(formData.get("email") || "").trim();
 
-export async function POST(request: Request) {
-  const formData = await request.formData();
-  const email = String(formData.get("email") || "");
-
-  const parse = bodySchema.safeParse({ email });
-  if (!parse.success) {
-    return NextResponse.redirect(new URL("/login?error=invalid_email", request.url));
+  if (!email) {
+    return NextResponse.redirect(new URL("/login?e=missing_email", req.url));
   }
 
-  const supabase = createSupabaseRouteHandlerClient();
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
-  await supabase.auth.signInWithOtp({
+  if (!supabaseUrl || !supabaseAnonKey) {
+    return NextResponse.redirect(new URL("/login?e=missing_env", req.url));
+  }
+
+  const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+  // IMPORTANTÍSSIMO: redirectTo tem que ser seu domínio real em prod
+  const origin = new URL(req.url).origin;
+
+  const { error } = await supabase.auth.signInWithOtp({
     email,
     options: {
-      emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`
-    }
+      emailRedirectTo: `${origin}/auth/callback`,
+      shouldCreateUser: true,
+    },
   });
 
-  return NextResponse.redirect(
-    new URL("/login?status=magic_link_sent", request.url)
-  );
-}
+  if (error) {
+    return NextResponse.redirect(
+      new URL(`/login?e=${encodeURIComponent(error.message)}`, req.url)
+    );
+  }
 
+  return NextResponse.redirect(new URL("/login?ok=sent", req.url));
+}
