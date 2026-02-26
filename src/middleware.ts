@@ -78,13 +78,6 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(redirectUrl);
   }
 
-  // Check MFA
-  const mfaVerifiedCookie = request.cookies.get('mfa_verified');
-  if (!mfaVerifiedCookie || mfaVerifiedCookie.value !== '1') {
-    const redirectUrl = new URL("/mfa", request.url);
-    redirectUrl.searchParams.set("redirectTo", pathname);
-    return NextResponse.redirect(redirectUrl);
-  }
 
   // Admin Check
   if (pathname.startsWith(ADMIN_PREFIX)) {

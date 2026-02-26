@@ -153,7 +153,7 @@ BEGIN
   INSERT INTO public.mfa_challenges (user_id, pin_hash, expires_at, ip, user_agent)
   VALUES (
     p_user_id,
-    public.crypt(p_pin, public.gen_salt('bf')),
+    extensions.crypt(p_pin, extensions.gen_salt('bf')),
     NOW() + INTERVAL '10 minutes',
     p_ip,
     p_user_agent
@@ -202,7 +202,7 @@ BEGIN
   END IF;
 
   -- Verifica HASH
-  IF v_challenge.pin_hash = public.crypt(p_pin, v_challenge.pin_hash) THEN
+  IF v_challenge.pin_hash = extensions.crypt(p_pin, v_challenge.pin_hash) THEN
     -- Sucesso!
     UPDATE public.mfa_challenges SET used_at = NOW() WHERE id = v_challenge.id;
     INSERT INTO public.auth_events (user_id, event_type) VALUES (v_user_id, 'mfa_ok');
