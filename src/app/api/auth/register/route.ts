@@ -72,6 +72,6 @@ export async function POST(request: Request) {
         return NextResponse.json({ success: true, message: 'Conta criada com sucesso!' });
     } catch (error: any) {
         console.error('Register error:', error);
-        return NextResponse.json({ error: 'Ocorreu um erro no servidor' }, { status: 500 });
+        return NextResponse.json({ error: error.message || 'Ocorreu um erro no servidor' }, { status: 500 });
     }
 }
