@@ -29,7 +29,10 @@ export default function RegisterPage() {
                 body: JSON.stringify(formData),
             });
 
-            const data = await res.json();
+            let data = {};
+            try {
+                data = await res.json();
+            } catch (e) { }
 
             if (!res.ok) {
                 throw new Error(data.error || 'Erro ao registrar');

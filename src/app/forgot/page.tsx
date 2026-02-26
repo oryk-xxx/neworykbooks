@@ -24,10 +24,13 @@ export default function ForgotPasswordPage() {
                 body: JSON.stringify({ email }),
             });
 
-            const data = await res.json();
+            let data = {};
+            try {
+                data = await res.json();
+            } catch (e) { }
 
             if (!res.ok) {
-                throw new Error(data.error || 'Erro ao processar');
+                throw new Error(data?.error || 'Erro ao processar');
             }
 
             setSuccess(data.message);

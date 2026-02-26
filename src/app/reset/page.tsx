@@ -29,10 +29,13 @@ export default function ResetPasswordPage() {
                 body: JSON.stringify(formData),
             });
 
-            const data = await res.json();
+            let data = {};
+            try {
+                data = await res.json();
+            } catch (e) { }
 
             if (!res.ok) {
-                throw new Error(data.error || 'Erro ao alterar a senha');
+                throw new Error(data?.error || 'Erro ao alterar a senha');
             }
 
             setSuccess('Senha alterada com sucesso!');

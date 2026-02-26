@@ -23,10 +23,13 @@ export default function MFAPage() {
                 body: JSON.stringify({ pin }),
             });
 
-            const data = await res.json();
+            let data = {};
+            try {
+                data = await res.json();
+            } catch (e) { }
 
             if (!res.ok) {
-                throw new Error(data.error || 'PIN Validation Failed');
+                throw new Error(data?.error || 'PIN Validation Failed');
             }
 
             router.push('/reader'); // Ou para /app, dashboard, etc.
