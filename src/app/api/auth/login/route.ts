@@ -64,7 +64,7 @@ export async function POST(request: Request) {
 
         if (challengeError) {
             console.error('MFA challenge create error:', challengeError);
-            return NextResponse.json({ error: 'Erro ao gerar MFA' }, { status: 500 });
+            return NextResponse.json({ error: challengeError.message || 'Erro ao gerar MFA' }, { status: 500 });
         }
 
         // SIMULAÇÃO DE E-MAIL OTP
@@ -78,6 +78,6 @@ export async function POST(request: Request) {
 
     } catch (error: any) {
         console.error('Login error:', error);
-        return NextResponse.json({ error: 'Ocorreu um erro no servidor' }, { status: 500 });
+        return NextResponse.json({ error: error.message || 'Ocorreu um erro no servidor' }, { status: 500 });
     }
 }
