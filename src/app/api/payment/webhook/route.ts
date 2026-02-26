@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { env } from "../../../../lib/env";
-import { createSupabaseServiceRoleClient } from "../../../../lib/supabaseServer";
+import { createSupabaseServiceRoleClient } from "@/lib/supabaseServer";
 
 export async function POST(request: Request) {
   const body = await request.json().catch(() => null);

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { createSupabaseRouteHandlerClient } from "lib/supabaseServer";
+import { createSupabaseServerClient } from "@/lib/supabaseServer";
 import type { PageContent } from "lib/blocks";
 import { evaluateSummaryWithAI } from "lib/ai";
 
@@ -11,7 +11,7 @@ const bodySchema = z.object({
 });
 
 export async function POST(request: Request) {
-  const supabase = createSupabaseRouteHandlerClient();
+  const supabase = createSupabaseServerClient();
   const {
     data: { session }
   } = await supabase.auth.getSession();

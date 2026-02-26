@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
-import { createSupabaseRouteHandlerClient } from "lib/supabaseServer";
+import { createSupabaseServerClient } from "@/lib/supabaseServer";
 
 export async function POST(request: Request, props: { params: { bookId: string } }) {
-  const supabase = createSupabaseRouteHandlerClient();
+  const supabase = createSupabaseServerClient();
   const { data: book } = await supabase
     .from("books")
     .select("status")

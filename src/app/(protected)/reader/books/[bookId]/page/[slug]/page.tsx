@@ -1,13 +1,13 @@
 import { notFound } from "next/navigation";
 import { BlockRenderer } from "components/editor/BlockRenderer";
-import { createSupabaseServerComponentClient } from "lib/supabaseServer";
+import { createSupabaseServerClient } from "@/lib/supabaseServer";
 import type { PageContent } from "lib/blocks";
 import { AntiLeakGuard } from "components/AntiLeakGuard";
 
 export default async function ReaderPage(props: {
   params: { bookId: string; slug: string };
 }) {
-  const supabase = createSupabaseServerComponentClient();
+  const supabase = createSupabaseServerClient();
   const {
     data: { session }
   } = await supabase.auth.getSession();

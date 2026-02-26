@@ -1,7 +1,7 @@
-import { createSupabaseServerComponentClient } from "lib/supabaseServer";
+import { createSupabaseServerClient } from "@/lib/supabaseServer";
 
 export default async function NewBookPage() {
-  const supabase = createSupabaseServerComponentClient();
+  const supabase = createSupabaseServerClient();
   await supabase.auth.getSession();
 
   return (

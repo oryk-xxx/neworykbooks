@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { createSupabaseServerComponentClient } from "lib/supabaseServer";
+import { createSupabaseServerClient } from "@/lib/supabaseServer";
 
 export default async function ReaderHomePage() {
-  const supabase = createSupabaseServerComponentClient();
+  const supabase = createSupabaseServerClient();
 
   const {
     data: { session }

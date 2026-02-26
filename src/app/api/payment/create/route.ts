@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 import { env } from "../../../../lib/env";
-import { createSupabaseRouteHandlerClient } from "../../../../lib/supabaseServer";
+import { createSupabaseServerClient } from "@/lib/supabaseServer";
 
 export async function POST() {
-  const supabase = createSupabaseRouteHandlerClient();
+  const supabase = createSupabaseServerClient();
   const {
     data: { session }
   } = await supabase.auth.getSession();

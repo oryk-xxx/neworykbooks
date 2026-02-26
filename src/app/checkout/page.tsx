@@ -1,5 +1,5 @@
 import { env } from "../../lib/env";
-import { createSupabaseServerComponentClient } from "../../lib/supabaseServer";
+import { createSupabaseServerClient } from "@/lib/supabaseServer";
 export const dynamic = "force-dynamic";
 
 async function createPixPayment() {
@@ -14,7 +14,7 @@ async function createPixPayment() {
 }
 
 export default async function CheckoutPage() {
-  const supabase = createSupabaseServerComponentClient();
+  const supabase = createSupabaseServerClient();
   const {
     data: { session }
   } = await supabase.auth.getSession();

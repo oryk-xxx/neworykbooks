@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { createSupabaseServerComponentClient } from "lib/supabaseServer";
+import { createSupabaseServerClient } from "@/lib/supabaseServer";
 
 export default async function AdminBooksPage() {
-  const supabase = createSupabaseServerComponentClient();
+  const supabase = createSupabaseServerClient();
   const { data: books } = await supabase
     .from("books")
     .select("id, title, status, created_at")

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { createSupabaseRouteHandlerClient } from "lib/supabaseServer";
+import { createSupabaseServerClient } from "@/lib/supabaseServer";
 
 const schema = z.object({
   slug: z.string().min(2),
@@ -9,7 +9,7 @@ const schema = z.object({
 });
 
 export async function POST(request: Request, props: { params: { bookId: string; pageId: string } }) {
-  const supabase = createSupabaseRouteHandlerClient();
+  const supabase = createSupabaseServerClient();
   const form = await request.formData();
   const parse = schema.safeParse({
     slug: String(form.get("slug") || ""),

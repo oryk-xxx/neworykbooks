@@ -1,13 +1,13 @@
 import { notFound } from "next/navigation";
 import { BlockRenderer } from "components/editor/BlockRenderer";
 import { BlockEditor } from "components/editor/BlockEditor";
-import { createSupabaseServerComponentClient } from "lib/supabaseServer";
+import { createSupabaseServerClient } from "@/lib/supabaseServer";
 import type { PageContent } from "lib/blocks";
 
 export default async function EditPage(props: {
   params: { bookId: string; pageId: string };
 }) {
-  const supabase = createSupabaseServerComponentClient();
+  const supabase = createSupabaseServerClient();
   const { data: page } = await supabase
     .from("pages")
     .select("id, slug, order_index, content")

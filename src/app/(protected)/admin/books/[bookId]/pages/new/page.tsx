@@ -1,8 +1,8 @@
-import { createSupabaseServerComponentClient } from "lib/supabaseServer";
+import { createSupabaseServerClient } from "@/lib/supabaseServer";
 import { BlockEditor } from "components/editor/BlockEditor";
 
 export default async function NewPage(props: { params: { bookId: string } }) {
-  const supabase = createSupabaseServerComponentClient();
+  const supabase = createSupabaseServerClient();
   await supabase.auth.getSession();
   const orderIndex = 1;
 
