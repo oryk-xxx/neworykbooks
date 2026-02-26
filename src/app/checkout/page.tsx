@@ -1,5 +1,6 @@
 import { env } from "../../lib/env";
 import { createSupabaseServerComponentClient } from "../../lib/supabaseServer";
+export const dynamic = "force-dynamic";
 
 async function createPixPayment() {
   const res = await fetch(`${env.siteUrl}/api/payment/create`, {
