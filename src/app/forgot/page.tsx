@@ -24,7 +24,7 @@ export default function ForgotPasswordPage() {
                 body: JSON.stringify({ email }),
             });
 
-            let data = {};
+            let data: any = {};
             try {
                 data = await res.json();
             } catch (e) { }

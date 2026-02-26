@@ -23,7 +23,7 @@ export default function MFAPage() {
                 body: JSON.stringify({ pin }),
             });
 
-            let data = {};
+            let data: any = {};
             try {
                 data = await res.json();
             } catch (e) { }

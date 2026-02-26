@@ -29,7 +29,7 @@ export default function ResetPasswordPage() {
                 body: JSON.stringify(formData),
             });
 
-            let data = {};
+            let data: any = {};
             try {
                 data = await res.json();
             } catch (e) { }
