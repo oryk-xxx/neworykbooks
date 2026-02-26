@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { createSupabaseServerClient } from "@/lib/supabaseServer";
-import type { PageContent } from "lib/blocks";
-import { evaluateSummaryWithAI } from "lib/ai";
+import type { PageContent } from "@/lib/blocks";
+import { evaluateSummaryWithAI } from "@/lib/ai";
 
 const bodySchema = z.object({
   book_id: z.string().uuid(),
@@ -99,8 +99,8 @@ function evaluateSummary(summary: string, content: PageContent) {
         b.type === "heading"
           ? (b.data as any).text
           : b.type === "quote"
-          ? (b.data as any).text
-          : (b.data as any).text;
+            ? (b.data as any).text
+            : (b.data as any).text;
       if (t) textParts.push(t.toLowerCase());
     }
     if (b.type === "list") {
