@@ -20,7 +20,12 @@
     "types": [
       "node"
     ],
-    "baseUrl": "src",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
     "plugins": [
       {
         "name": "next"
