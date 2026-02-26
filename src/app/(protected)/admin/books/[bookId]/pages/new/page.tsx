@@ -1,5 +1,5 @@
 import { createSupabaseServerClient } from "@/lib/supabaseServer";
-import { BlockEditor } from "components/editor/BlockEditor";
+import { BlockEditor } from "@/components/editor/BlockEditor";
 
 export default async function NewPage(props: { params: { bookId: string } }) {
   const supabase = createSupabaseServerClient();

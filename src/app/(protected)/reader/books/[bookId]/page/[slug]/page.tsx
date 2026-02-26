@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
-import { BlockRenderer } from "components/editor/BlockRenderer";
+import { BlockRenderer } from "@/components/editor/BlockRenderer";
 import { createSupabaseServerClient } from "@/lib/supabaseServer";
 import type { PageContent } from "lib/blocks";
-import { AntiLeakGuard } from "components/AntiLeakGuard";
+import { AntiLeakGuard } from "@/components/AntiLeakGuard";
 
 export default async function ReaderPage(props: {
   params: { bookId: string; slug: string };
