@@ -34,7 +34,8 @@ export async function POST() {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${env.mercadoPagoAccessToken}`
+      Authorization: `Bearer ${env.mercadoPagoAccessToken}`,
+      "X-Idempotency-Key": `${user.id}-${Date.now()}`
     },
     body: JSON.stringify(payload)
   });
