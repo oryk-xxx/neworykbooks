@@ -22,7 +22,7 @@ export default function AdminLayout(props: { children: React.ReactNode }) {
             { label: "Obras", href: "/admin/books" },
             { label: "Audiência", href: "/admin/users" },
             { label: "Registros", href: "/admin/logs" },
-          ].map((item) => (
+          ].map((item: any) => (
             <Link
               key={item.href}
               href={item.href}

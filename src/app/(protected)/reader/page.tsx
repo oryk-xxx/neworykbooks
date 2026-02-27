@@ -70,7 +70,7 @@ export default async function ReaderHomePage() {
           </div>
 
           <div className="grid gap-6 md:grid-cols-2">
-            {books?.map((book) => (
+            {books?.map((book: any) => (
               <Link
                 key={book.id}
                 href={`/reader/books/${book.id}`}

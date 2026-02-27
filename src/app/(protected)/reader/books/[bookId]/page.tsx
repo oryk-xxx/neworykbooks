@@ -58,15 +58,15 @@ export default async function BookPagesIndex(props: {
       </header>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {pages?.map((p) => {
+        {pages?.map((p: any) => {
           const unlocked = p.order_index === 1 || unlockedSet.has(p.id);
           return (
             <Link
               key={p.id}
               href={`/reader/books/${book.id}/${p.slug}`}
               className={`oryk-surface p-6 group transition-all duration-300 ${unlocked
-                  ? "oryk-surface-hover border-white/[0.05]"
-                  : "opacity-40 cursor-not-allowed border-dashed border-white/[0.03]"
+                ? "oryk-surface-hover border-white/[0.05]"
+                : "opacity-40 cursor-not-allowed border-dashed border-white/[0.03]"
                 }`}
               onClick={(e) => !unlocked && e.preventDefault()}
             >
@@ -77,7 +77,7 @@ export default async function BookPagesIndex(props: {
                   </span>
                   <p className={`text-sm font-medium transition-colors ${unlocked ? "text-white group-hover:text-accent" : "text-text-meta"
                     }`}>
-                    {p.slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+                    {p.slug.split('-').map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
                   </p>
                 </div>
 

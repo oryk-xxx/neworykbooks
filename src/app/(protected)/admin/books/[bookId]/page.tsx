@@ -35,8 +35,8 @@ export default async function AdminBookPage(props: { params: { bookId: string } 
           <button
             type="submit"
             className={`${book.status === "published"
-                ? "oryk-surface-hover border-white/20 text-white/60"
-                : "oryk-button-accent"
+              ? "oryk-surface-hover border-white/20 text-white/60"
+              : "oryk-button-accent"
               } py-3 px-8 text-[10px] uppercase tracking-oryk transition-all duration-300`}
           >
             {book.status === "published" ? "Despublicar Obra" : "Publicar no Feed"}
@@ -59,7 +59,7 @@ export default async function AdminBookPage(props: { params: { bookId: string } 
         </div>
 
         <div className="grid gap-3">
-          {pages?.map((p) => (
+          {pages?.map((p: any) => (
             <Link
               key={p.id}
               href={`/admin/books/${book.id}/pages/${p.id}`}

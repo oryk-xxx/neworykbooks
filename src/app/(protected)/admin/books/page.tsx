@@ -25,7 +25,7 @@ export default async function AdminBooksPage() {
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {books?.map((b) => (
+        {books?.map((b: any) => (
           <Link
             key={b.id}
             href={`/admin/books/${b.id}`}
