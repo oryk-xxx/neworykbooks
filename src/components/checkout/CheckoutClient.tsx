@@ -68,7 +68,7 @@ export default function CheckoutClient({ user, hasAccess, initialPayment, price,
     if (!user) {
         return (
             <div className="oryk-surface p-10 text-center animate-in fade-in slide-in-from-bottom-8 duration-1000">
-                <p className="mb-6 text-text-secondary tracking-oryk uppercase text-[11px]">
+                <p className="mb-6 font-mono text-text-secondary tracking-[0.4em] uppercase text-[10px]">
                     Identificação necessária para transação.
                 </p>
                 <Link
@@ -85,10 +85,10 @@ export default function CheckoutClient({ user, hasAccess, initialPayment, price,
         return (
             <div className="oryk-surface p-10 text-center border-accent/20 animate-in fade-in zoom-in duration-700">
                 <div className="flex justify-center mb-6">
-                    <div className="h-2 w-2 rounded-full bg-accent shadow-[0_0_15px_rgba(43,255,136,0.6)]" />
+                    <div className="h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_15px_rgba(43,255,136,0.6)]" />
                 </div>
-                <h2 className="text-xl font-medium tracking-[0.3em] uppercase mb-2">Acesso Liberado</h2>
-                <p className="text-[10px] text-text-secondary tracking-oryk uppercase mb-10">
+                <h2 className="font-sans text-xl font-medium tracking-tight uppercase mb-2">Acesso Liberado</h2>
+                <p className="font-mono text-[10px] text-text-secondary tracking-[0.4em] uppercase mb-10">
                     Sua licença vitalícia está ativa
                 </p>
                 <Link
@@ -105,22 +105,22 @@ export default function CheckoutClient({ user, hasAccess, initialPayment, price,
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-1000">
             {!payment ? (
                 <div className="oryk-surface p-10 text-center">
-                    <h2 className="text-xl font-medium tracking-[0.3em] uppercase mb-8">Licença Vitalícia</h2>
+                    <h2 className="font-sans text-xl font-medium tracking-tight uppercase mb-8">Licença Vitalícia</h2>
                     <div className="flex flex-col items-center justify-center gap-1 mb-10">
-                        <div className="flex items-center gap-2">
-                            <span className="text-text-secondary text-sm line-through opacity-50">R$ {originalPrice}</span>
-                            <span className="bg-accent/10 text-accent text-[9px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">
+                        <div className="flex items-center gap-3">
+                            <span className="font-mono text-text-secondary text-[11px] line-through opacity-50 tracking-wider">R$ {originalPrice}</span>
+                            <span className="font-mono bg-accent/10 text-accent text-[8px] px-2 py-0.5 rounded tracking-[0.15em] font-bold uppercase">
                                 {Math.round((1 - price / originalPrice) * 100)}% OFF
                             </span>
                         </div>
                         <div className="flex items-center gap-3">
-                            <span className="text-5xl font-medium text-white tracking-tighter">R$ {price}</span>
-                            <span className="text-text-secondary text-[10px] uppercase tracking-oryk mt-2">pagamento único</span>
+                            <span className="font-sans text-5xl font-medium text-white tracking-tighter">R$ {price}</span>
+                            <span className="font-mono text-text-secondary text-[10px] uppercase tracking-[0.2em] mt-2 opacity-60">pagamento único</span>
                         </div>
                     </div>
 
                     {error && (
-                        <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-[10px] p-4 rounded-xl mb-6 uppercase tracking-oryk">
+                        <div className="font-mono bg-red-500/10 border border-red-500/20 text-red-400 text-[10px] p-4 rounded-xl mb-6 uppercase tracking-[0.2em]">
                             {error}
                         </div>
                     )}
@@ -133,7 +133,7 @@ export default function CheckoutClient({ user, hasAccess, initialPayment, price,
                         {loading ? "Processando..." : "Gerar Código PIX →"}
                     </button>
 
-                    <p className="mt-8 text-[9px] text-text-meta uppercase tracking-[0.2em] leading-relaxed opacity-50">
+                    <p className="mt-8 font-mono text-[9px] text-text-meta uppercase tracking-[0.4em] leading-relaxed opacity-50">
                         Ativação instantânea após confirmação bancária
                     </p>
                 </div>
@@ -147,14 +147,14 @@ export default function CheckoutClient({ user, hasAccess, initialPayment, price,
 
                             <div className="w-full space-y-6">
                                 <div className="space-y-2">
-                                    <label className="text-[9px] uppercase tracking-[0.2em] text-text-meta px-1 font-medium">
+                                    <label className="font-mono text-[10px] uppercase tracking-[0.4em] text-text-secondary px-1 font-medium opacity-60">
                                         PIX Copia e Cola
                                     </label>
                                     <div className="group relative">
                                         <input
                                             readOnly
                                             value={payment.qr_code}
-                                            className="oryk-input pr-14 text-[11px] font-mono truncate border-white/[0.08] bg-black/40"
+                                            className="oryk-input pr-14 font-mono text-[11px] truncate border-white/[0.08] bg-black/40"
                                         />
                                         <button
                                             onClick={copyToClipboard}
@@ -170,7 +170,7 @@ export default function CheckoutClient({ user, hasAccess, initialPayment, price,
                                         href={payment.ticket_url || "#"}
                                         target="_blank"
                                         rel="noreferrer"
-                                        className="w-full h-14 flex items-center justify-center bg-white/[0.03] border border-white/[0.08] rounded-2xl text-[10px] uppercase tracking-[0.2em] hover:bg-white/[0.06] transition-all"
+                                        className="w-full h-14 flex items-center justify-center bg-white/[0.03] border border-white/[0.08] rounded-2xl font-mono text-[10px] uppercase tracking-[0.4em] hover:bg-white/[0.06] transition-all text-text-secondary hover:text-primary"
                                     >
                                         Ver detalhes no Mercado Pago
                                     </a>
@@ -183,10 +183,10 @@ export default function CheckoutClient({ user, hasAccess, initialPayment, price,
                         <div className="flex justify-center mb-4">
                             <div className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse shadow-[0_0_10px_#2BFF88]" />
                         </div>
-                        <p className="text-[10px] text-text-secondary tracking-[0.2em] uppercase mb-1">
+                        <p className="font-mono text-[10px] text-text-secondary tracking-[0.4em] uppercase mb-1">
                             Aguardando confirmação
                         </p>
-                        <p className="text-[9px] text-text-meta uppercase tracking-oryk opacity-60">
+                        <p className="font-mono text-[9px] text-text-meta uppercase tracking-[0.2em] opacity-60">
                             Detector de pagamento ativo • 10s
                         </p>
                     </div>

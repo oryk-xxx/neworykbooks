@@ -23,12 +23,12 @@ export default async function CheckoutPage() {
   return (
     <div className="mx-auto max-w-lg px-6 py-20 min-h-[80vh] flex flex-col justify-center">
       <div className="text-center mb-16 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-        <h1 className="text-3xl font-medium tracking-[0.5em] text-white uppercase mb-4">
+        <h1 className="font-sans text-3xl font-medium tracking-[-0.02em] text-white uppercase mb-4">
           Checkout
         </h1>
         <div className="flex items-center justify-center gap-4">
           <div className="h-[1px] w-8 bg-white/10" />
-          <p className="text-[10px] text-text-secondary tracking-[0.3em] uppercase font-medium">
+          <p className="font-mono text-[10px] text-text-secondary tracking-[0.4em] uppercase">
             Finalize sua aquisição
           </p>
           <div className="h-[1px] w-8 bg-white/10" />
@@ -43,7 +43,7 @@ export default async function CheckoutPage() {
       />
 
       <div className="mt-20 text-center opacity-30 animate-in fade-in duration-1000 delay-500">
-        <p className="text-[9px] tracking-[0.4em] uppercase text-text-meta">
+        <p className="font-mono text-[9px] tracking-[0.4em] uppercase text-text-meta">
           ØRYK — Cryptographic Bookshelf
         </p>
       </div>
