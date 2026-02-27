@@ -60,47 +60,60 @@ export default async function BookPagesIndex(props: {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {pages?.map((p: any) => {
           const unlocked = p.order_index === 1 || unlockedSet.has(p.id);
-          return (
-            <Link
-              key={p.id}
-              href={`/reader/books/${book.id}/${p.slug}`}
-              className={`oryk-surface p-6 group transition-all duration-300 ${unlocked
-                ? "oryk-surface-hover border-white/[0.05]"
-                : "opacity-40 cursor-not-allowed border-dashed border-white/[0.03]"
-                }`}
-              onClick={(e) => !unlocked && e.preventDefault()}
-            >
-              <div className="flex flex-col h-full justify-between gap-4">
-                <div className="space-y-1">
-                  <span className="text-[9px] uppercase tracking-[0.3em] text-text-meta">
-                    Página {String(p.order_index).padStart(2, '0')}
-                  </span>
-                  <p className={`text-sm font-medium transition-colors ${unlocked ? "text-white group-hover:text-accent" : "text-text-meta"
-                    }`}>
-                    {p.slug.split('-').map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
-                  </p>
-                </div>
-
-                <div className="flex items-center justify-between pt-2">
-                  {!unlocked ? (
-                    <span className="text-[9px] uppercase tracking-oryk text-text-meta flex items-center gap-1.5 font-light">
-                      <span className="h-1 w-1 rounded-full bg-white/20" />
-                      Conteúdo Bloqueado
-                    </span>
-                  ) : (
-                    <span className="text-[9px] uppercase tracking-oryk text-accent flex items-center gap-1.5 font-light">
-                      <span className="h-1 w-1 rounded-full bg-accent shadow-[0_0_8px_rgba(43,255,136,0.5)]" />
-                      Disponível
-                    </span>
-                  )}
-                  {unlocked && (
-                    <span className="text-[10px] text-accent opacity-0 group-hover:opacity-100 transition-opacity">
-                      LER →
-                    </span>
-                  )}
-                </div>
+          const cardContent = (
+            <div className="flex flex-col h-full justify-between gap-4">
+              <div className="space-y-1">
+                <span className="text-[9px] uppercase tracking-[0.3em] text-text-meta">
+                  Página {String(p.order_index).padStart(2, '0')}
+                </span>
+                <p className={`text-sm font-medium transition-colors ${unlocked ? "text-white group-hover:text-accent" : "text-text-meta"
+                  }`}>
+                  {p.slug.split('-').map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+                </p>
               </div>
-            </Link>
+
+              <div className="flex items-center justify-between pt-2">
+                {!unlocked ? (
+                  <span className="text-[9px] uppercase tracking-oryk text-text-meta flex items-center gap-1.5 font-light">
+                    <span className="h-1 w-1 rounded-full bg-white/20" />
+                    Conteúdo Bloqueado
+                  </span>
+                ) : (
+                  <span className="text-[9px] uppercase tracking-oryk text-accent flex items-center gap-1.5 font-light">
+                    <span className="h-1 w-1 rounded-full bg-accent shadow-[0_0_8px_rgba(43,255,136,0.5)]" />
+                    Disponível
+                  </span>
+                )}
+                {unlocked && (
+                  <span className="text-[10px] text-accent opacity-0 group-hover:opacity-100 transition-opacity">
+                    LER →
+                  </span>
+                )}
+              </div>
+            </div>
+          );
+
+          const cardClassName = `oryk-surface p-6 group transition-all duration-300 ${unlocked
+            ? "oryk-surface-hover border-white/[0.05]"
+            : "opacity-40 cursor-not-allowed border-dashed border-white/[0.03]"
+            }`;
+
+          if (unlocked) {
+            return (
+              <Link
+                key={p.id}
+                href={`/reader/books/${book.id}/${p.slug}`}
+                className={cardClassName}
+              >
+                {cardContent}
+              </Link>
+            );
+          }
+
+          return (
+            <div key={p.id} className={cardClassName}>
+              {cardContent}
+            </div>
           );
         })}
       </div>
