@@ -23,7 +23,7 @@ body {
 
 @layer components {
   .oryk-surface {
-    @apply rounded-2xl border border-white/[0.05] bg-gradient-to-b from-white/[0.02] to-transparent shadow-oryk backdrop-blur-md transition-all duration-250;
+    @apply rounded-2xl border border-white/[0.05] bg-gradient-to-b from-white/[0.02] to-transparent shadow-oryk backdrop-blur-md transition-all duration-[250ms];
   }
 
   .oryk-surface-hover {
@@ -31,7 +31,7 @@ body {
   }
 
   .oryk-button {
-    @apply inline-flex items-center justify-center rounded-full px-5 py-2.5 text-xs font-medium tracking-oryk transition-all duration-250 active:scale-[0.98];
+    @apply inline-flex items-center justify-center rounded-full px-5 py-2.5 text-xs font-medium tracking-oryk transition-all duration-[250ms] active:scale-[0.98];
   }
 
   .oryk-button-primary {
