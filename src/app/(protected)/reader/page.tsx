@@ -28,61 +28,80 @@ export default async function ReaderHomePage() {
     : { data: [] as any[] };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-12">
       <header className="space-y-2">
-        <h1 className="text-xl font-semibold tracking-tight">
-          Sua biblioteca ØRYK
+        <h1 className="text-3xl font-medium tracking-oryk-wide text-white uppercase">
+          Biblioteca
         </h1>
-        <p className="text-xs text-zinc-400">
-          Leitura guiada, ritmo próprio, nenhuma distração.
+        <p className="text-sm text-text-secondary tracking-oryk uppercase">
+          Seu acervo de conhecimento refinado
         </p>
       </header>
 
       {!hasAccess ? (
-        <div className="rounded-2xl border border-accent/40 bg-accentMuted/40 p-4 text-sm text-zinc-100">
-          <p className="mb-2 font-medium">
-            Acesso bloqueado · é necessário completar o pagamento único de R$7.
-          </p>
-          <p className="mb-3 text-xs text-zinc-200">
-            O acesso é vitalício. Assim que o pagamento PIX for aprovado, sua
-            biblioteca será liberada automaticamente.
+        <div className="oryk-surface p-8 border-accent/20">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
+            <p className="text-xs font-medium uppercase tracking-oryk text-accent">
+              Acesso Restrito
+            </p>
+          </div>
+          <p className="mb-6 text-sm text-text-secondary leading-relaxed">
+            Sua biblioteca está aguardando a liberação. Complete o pagamento único para desbloquear o acervo completo vitaliciamente.
           </p>
           <Link
             href="/checkout"
-            className="inline-flex items-center rounded-full bg-accent px-4 py-2 text-xs font-medium text-black"
+            className="oryk-button-accent py-3 px-8 text-[10px] uppercase tracking-oryk shadow-[0_10px_30px_rgba(43,255,136,0.15)]"
           >
-            Ir para o pagamento PIX
+            Ir para o Checkout
           </Link>
         </div>
       ) : null}
 
       {hasAccess ? (
-        <section className="space-y-4">
-          <h2 className="text-sm font-medium text-zinc-200">Livros disponíveis</h2>
-          <div className="grid gap-4 md:grid-cols-2">
+        <section className="space-y-8">
+          <div className="flex items-center justify-between border-b border-white/[0.05] pb-4">
+            <h2 className="text-xs font-medium uppercase tracking-oryk-wide text-text-meta">
+              Publicações Disponíveis
+            </h2>
+            <span className="text-[10px] text-text-meta tracking-oryk">
+              {books?.length || 0} OBRA(S)
+            </span>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2">
             {books?.map((book) => (
               <Link
                 key={book.id}
                 href={`/reader/books/${book.id}`}
-                className="group flex flex-col overflow-hidden rounded-2xl border border-borderSubtle/80 bg-black/60 transition hover:border-accent/60"
+                className="oryk-surface oryk-surface-hover group"
               >
-                <div className="flex-1 space-y-3 p-4">
-                  <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
-                    Livro
-                  </p>
-                  <p className="text-sm font-medium text-zinc-100 group-hover:text-accent">
-                    {book.title}
-                  </p>
-                  {book.summary ? (
-                    <p className="text-xs text-zinc-400 line-clamp-3">
-                      {book.summary}
-                    </p>
-                  ) : null}
-                  <div className="flex flex-wrap gap-2 text-[10px] text-zinc-400">
+                <div className="p-6 space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] uppercase tracking-[0.3em] text-text-meta">
+                      Edição Digital
+                    </span>
+                    <span className="text-[10px] text-accent tracking-oryk opacity-0 group-hover:opacity-100 transition-opacity">
+                      LER AGORA →
+                    </span>
+                  </div>
+
+                  <div className="space-y-2">
+                    <h3 className="text-lg font-medium text-white group-hover:text-accent transition-colors">
+                      {book.title}
+                    </h3>
+                    {book.summary ? (
+                      <p className="text-xs text-text-secondary line-clamp-2 leading-relaxed font-light">
+                        {book.summary}
+                      </p>
+                    ) : null}
+                  </div>
+
+                  <div className="flex flex-wrap gap-2 pt-2">
                     {book.tags?.map((tag: string) => (
                       <span
                         key={tag}
-                        className="rounded-full bg-accentMuted/60 px-2 py-0.5"
+                        className="text-[9px] uppercase tracking-oryk text-text-meta border border-white/[0.05] rounded-md px-2 py-0.5 bg-white/[0.02]"
                       >
                         {tag}
                       </span>
@@ -91,10 +110,13 @@ export default async function ReaderHomePage() {
                 </div>
               </Link>
             ))}
+
             {books && books.length === 0 ? (
-              <p className="text-xs text-zinc-500">
-                Nenhum livro publicado ainda. O admin deve criar livros pelo painel.
-              </p>
+              <div className="col-span-full py-20 text-center oryk-surface border-dashed">
+                <p className="text-xs text-text-meta uppercase tracking-oryk">
+                  Nenhum livro publicado até o momento.
+                </p>
+              </div>
             ) : null}
           </div>
         </section>

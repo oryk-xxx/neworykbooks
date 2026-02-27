@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
+import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 
 export const metadata: Metadata = {
   title: "ØRYK Books",
@@ -8,22 +12,29 @@ export const metadata: Metadata = {
 
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className="dark">
-      <body className="min-h-screen bg-background text-foreground">
-        <div className="fixed inset-0 pointer-events-none bg-[radial-gradient(circle_at_top,_rgba(123,92,255,0.35),_transparent_55%),radial-gradient(circle_at_bottom,_rgba(0,0,0,0.9),_transparent_55%)]" />
+    <html lang="pt-BR" className={`dark ${inter.variable} ${outfit.variable}`}>
+      <body className="min-h-screen bg-background text-foreground font-sans">
         <div className="relative min-h-screen flex flex-col">
-          <header className="border-b border-borderSubtle/60 bg-black/40 backdrop-blur-xl">
-            <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-              <div className="flex items-baseline gap-2">
-                <span className="text-xl font-semibold tracking-[0.25em] uppercase">
+          <header className="border-b border-borderSubtle bg-background/80 backdrop-blur-xl sticky top-0 z-50">
+            <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-5">
+              <div className="flex items-center gap-3">
+                <span className="text-xl font-medium tracking-oryk-wide uppercase">
                   ØRYK
                 </span>
-                <span className="text-sm text-zinc-400">Books</span>
+                <span className="h-3 w-px bg-white/10" />
+                <span className="text-[10px] tracking-[0.3em] uppercase text-text-meta">
+                  Books
+                </span>
               </div>
-              <div className="flex items-center gap-3 text-xs text-zinc-400">
-                <span>Acesso vitalício</span>
-                <span className="h-4 w-px bg-zinc-700" />
-                <span>R$7</span>
+              <div className="flex items-center gap-6 text-[10px] uppercase tracking-oryk text-text-secondary">
+                <div className="hidden md:flex items-center gap-2">
+                  <span className="h-1 w-1 rounded-full bg-accent animate-pulse" />
+                  <span>Acesso vitalício</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-white">R$7</span>
+                  <span className="text-text-meta">/ unico</span>
+                </div>
               </div>
             </div>
           </header>

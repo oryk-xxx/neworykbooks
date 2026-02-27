@@ -9,32 +9,61 @@ export default async function AdminBooksPage() {
     .order("created_at", { ascending: false });
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-1000">
       <div className="flex items-center justify-between">
-        <h2 className="text-sm font-medium text-zinc-200">Livros</h2>
+        <div className="space-y-1">
+          <h2 className="text-[10px] uppercase tracking-[0.3em] text-text-meta">Gerenciamento</h2>
+          <p className="text-xl font-medium tracking-oryk text-white uppercase">Biblioteca do Autor</p>
+        </div>
         <Link
           href="/admin/books/new"
-          className="rounded-full border border-accent/60 bg-accent/10 px-3 py-1 text-[11px] text-accent"
+          className="oryk-button-accent py-3 px-8 text-[10px] uppercase tracking-oryk shadow-[0_10px_30px_rgba(43,255,136,0.1)]"
         >
-          Novo livro
+          + Novo Volume
         </Link>
       </div>
-      <div className="grid gap-3 md:grid-cols-2">
+
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {books?.map((b) => (
           <Link
             key={b.id}
             href={`/admin/books/${b.id}`}
-            className="rounded-xl border border-borderSubtle/80 bg-black/60 p-3 text-xs text-zinc-200"
+            className="oryk-surface p-6 group transition-all duration-300 oryk-surface-hover border-white/[0.05]"
           >
-            <div className="flex items-center justify-between">
-              <span>{b.title}</span>
-              <span className="rounded-full border border-borderSubtle/70 px-2 py-0.5">
-                {b.status}
-              </span>
+            <div className="flex flex-col h-full justify-between gap-6">
+              <div className="space-y-2">
+                <span className="text-[9px] uppercase tracking-[0.3em] text-text-meta">
+                  ID_{b.id.slice(0, 8).toUpperCase()}
+                </span>
+                <p className="text-sm font-medium text-white group-hover:text-accent transition-colors leading-relaxed">
+                  {b.title}
+                </p>
+              </div>
+
+              <div className="flex items-center justify-between pt-4 border-t border-white/[0.03]">
+                <span className={`text-[9px] uppercase tracking-oryk flex items-center gap-1.5 font-light ${b.status === 'published' ? 'text-accent' : 'text-text-meta'
+                  }`}>
+                  <span className={`h-1 w-1 rounded-full ${b.status === 'published' ? 'bg-accent shadow-[0_0_8px_rgba(43,255,136,0.5)]' : 'bg-white/20'
+                    }`} />
+                  {b.status === 'published' ? 'Publicado' : 'Rascunho'}
+                </span>
+
+                <span className="text-[10px] text-accent opacity-0 group-hover:opacity-100 transition-opacity">
+                  EDITAR →
+                </span>
+              </div>
             </div>
           </Link>
         ))}
       </div>
+
+      {books && books.length === 0 ? (
+        <div className="py-24 text-center oryk-surface border-dashed">
+          <p className="text-xs text-text-meta uppercase tracking-oryk">
+            Nenhuma obra encontrada no repositório.
+          </p>
+        </div>
+      ) : null}
     </div>
   );
 }

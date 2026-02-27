@@ -7,8 +7,44 @@ body {
   height: 100%;
 }
 
-body {
-  @apply bg-background text-foreground antialiased;
+@layer base {
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-accent/30;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply tracking-oryk font-medium;
+  }
+}
+
+@layer components {
+  .oryk-surface {
+    @apply rounded-2xl border border-white/[0.05] bg-gradient-to-b from-white/[0.02] to-transparent shadow-oryk backdrop-blur-md transition-all duration-250;
+  }
+
+  .oryk-surface-hover {
+    @apply hover:border-white/[0.1] hover:bg-surface-hover;
+  }
+
+  .oryk-button {
+    @apply inline-flex items-center justify-center rounded-full px-5 py-2.5 text-xs font-medium tracking-oryk transition-all duration-250 active:scale-[0.98];
+  }
+
+  .oryk-button-primary {
+    @apply oryk-button bg-white text-black hover:shadow-glow;
+  }
+
+  .oryk-button-accent {
+    @apply oryk-button bg-accent text-black hover:shadow-[0_0_25px_rgba(43, 255, 136, 0.3)];
+  }
+
+  .oryk-input {
+    @apply w-full rounded-xl border border-white/[0.08] bg-surface-primary px-4 py-3 text-sm text-foreground placeholder:text-text-meta focus:border-accent/40 focus:outline-none focus:ring-1 focus:ring-accent/40 transition-all;
+  }
 }
 
 .no-select {
@@ -22,14 +58,32 @@ body {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  opacity: 0.06;
+  opacity: 0.04;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 5rem;
+  font-size: clamp(2rem, 10vw, 6rem);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.3em;
-  mix-blend-mode: overlay;
+  letter-spacing: 0.4em;
+  mix-blend-mode: plus-lighter;
+  filter: blur(1px);
 }
 
+/* Custom Scrollbar for Luxury Style */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
