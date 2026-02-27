@@ -5,26 +5,26 @@ export default async function ReaderHomePage() {
   const supabase = createSupabaseServerClient();
 
   const {
-    data: { session }
-  } = await supabase.auth.getSession();
+    data: { user }
+  } = await supabase.auth.getUser();
 
-  if (!session) {
+  if (!user) {
     return null;
   }
 
   const { data: entitlement } = await supabase
     .from("entitlements")
     .select("*")
-    .eq("user_id", session.user.id)
+    .eq("user_id", user.id)
     .maybeSingle();
 
   const hasAccess = entitlement?.active === true;
 
   const { data: books } = hasAccess
     ? await supabase
-        .from("books")
-        .select("id, title, cover_url, summary, tags, average_rating, status")
-        .order("created_at", { ascending: true })
+      .from("books")
+      .select("id, title, cover_url, summary, tags, average_rating, status")
+      .order("created_at", { ascending: true })
     : { data: [] as any[] };
 
   return (

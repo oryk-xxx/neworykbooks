@@ -2,36 +2,79 @@ import { env } from "../../lib/env";
 import { createSupabaseServerClient } from "@/lib/supabaseServer";
 export const dynamic = "force-dynamic";
 
-async function createPixPayment() {
-  const res = await fetch(`${env.siteUrl}/api/payment/create`, {
-    method: "POST",
-    cache: "no-store"
-  });
-  if (!res.ok) {
-    throw new Error("Falha ao criar pagamento PIX");
+async function createPixPayment(user: any) {
+  if (!env.mercadoPagoAccessToken) {
+    throw new Error("Mercado Pago access token não configurado");
   }
-  return res.json();
+
+  const payload = {
+    transaction_amount: 7,
+    description: "Acesso vitalício ØRYK Books",
+    payment_method_id: "pix",
+    payer: {
+      email: user.email || "user@example.com",
+      first_name: user.user_metadata?.name || "Usuário"
+    },
+    notification_url: `${env.siteUrl}/api/payment/webhook`
+  };
+
+  const mpRes = await fetch("https://api.mercadopago.com/v1/payments", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${env.mercadoPagoAccessToken}`
+    },
+    body: JSON.stringify(payload)
+  });
+
+  if (!mpRes.ok) {
+    const errText = await mpRes.text();
+    throw new Error(`Falha Mercado Pago: ${errText}`);
+  }
+
+  const json = await mpRes.json();
+  const supabase = createSupabaseServerClient();
+
+  await supabase
+    .from("entitlements")
+    .upsert({
+      user_id: user.id,
+      active: false,
+      last_payment_id: String(json.id)
+    })
+    .select("*")
+    .maybeSingle();
+
+  const qr = json?.point_of_interaction?.transaction_data?.qr_code;
+  const qrBase64 = json?.point_of_interaction?.transaction_data?.qr_code_base64;
+
+  return {
+    id: String(json.id),
+    status: json.status,
+    qr_code: qr,
+    qr_code_base64: qrBase64
+  };
 }
 
 export default async function CheckoutPage() {
   const supabase = createSupabaseServerClient();
   const {
-    data: { session }
-  } = await supabase.auth.getSession();
+    data: { user }
+  } = await supabase.auth.getUser();
 
-  const entitlement = session
+  const entitlement = user
     ? (
-        await supabase
-          .from("entitlements")
-          .select("*")
-          .eq("user_id", session.user.id)
-          .maybeSingle()
-      ).data
+      await supabase
+        .from("entitlements")
+        .select("*")
+        .eq("user_id", user.id)
+        .maybeSingle()
+    ).data
     : null;
 
   const hasAccess = entitlement?.active === true;
 
-  const payment = session && !hasAccess ? await createPixPayment() : null;
+  const payment = user && !hasAccess ? await createPixPayment(user) : null;
 
   return (
     <div className="mx-auto max-w-2xl px-6 py-10">
@@ -40,7 +83,7 @@ export default async function CheckoutPage() {
         Acesso único e vitalício à ØRYK Books. Valor: R$7.
       </p>
 
-      {!session ? (
+      {!user ? (
         <div className="mt-6 rounded-2xl border border-borderSubtle/80 bg-black/60 p-4 text-sm">
           <p className="mb-2">
             Faça login para iniciar o pagamento. Usamos link mágico por e-mail.
@@ -54,7 +97,7 @@ export default async function CheckoutPage() {
         </div>
       ) : null}
 
-      {session && hasAccess ? (
+      {user && hasAccess ? (
         <div className="mt-6 rounded-2xl border border-emerald-700/60 bg-emerald-950/40 p-4 text-sm text-emerald-50">
           <p className="mb-2">Acesso já está liberado para sua conta.</p>
           <a
@@ -66,7 +109,7 @@ export default async function CheckoutPage() {
         </div>
       ) : null}
 
-      {session && !hasAccess && payment ? (
+      {user && !hasAccess && payment ? (
         <div className="mt-6 grid gap-6 md:grid-cols-[1fr_1fr]">
           <div className="rounded-2xl border border-borderSubtle/80 bg-black/60 p-4">
             <p className="mb-2 text-[11px] uppercase tracking-[0.2em] text-zinc-500">
@@ -93,7 +136,7 @@ export default async function CheckoutPage() {
         </div>
       ) : null}
 
-      {session && !hasAccess && payment ? (
+      {user && !hasAccess && payment ? (
         <RefreshStatus paymentId={payment.id} />
       ) : null}
     </div>

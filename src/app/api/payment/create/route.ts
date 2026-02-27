@@ -5,10 +5,10 @@ import { createSupabaseServerClient } from "@/lib/supabaseServer";
 export async function POST() {
   const supabase = createSupabaseServerClient();
   const {
-    data: { session }
-  } = await supabase.auth.getSession();
+    data: { user }
+  } = await supabase.auth.getUser();
 
-  if (!session) {
+  if (!user) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
 
@@ -24,8 +24,8 @@ export async function POST() {
     description: "Acesso vitalício ØRYK Books",
     payment_method_id: "pix",
     payer: {
-      email: session.user.email || "user@example.com",
-      first_name: session.user.user_metadata?.name || "Usuário"
+      email: user.email || "user@example.com",
+      first_name: user.user_metadata?.name || "Usuário"
     },
     notification_url: `${env.siteUrl}/api/payment/webhook`
   };
@@ -52,7 +52,7 @@ export async function POST() {
   await supabase
     .from("entitlements")
     .upsert({
-      user_id: session.user.id,
+      user_id: user.id,
       active: false,
       last_payment_id: String(json.id)
     })
