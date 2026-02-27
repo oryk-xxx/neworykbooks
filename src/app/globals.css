@@ -11,64 +11,129 @@ body {
   body {
     @apply bg-background text-foreground antialiased selection:bg-accent/30;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-    --oryk-accent-shadow: 0 0 25px rgba(43, 255, 136, 0.3);
+    --oryk-accent-shadow: 0 0 25px hsla(153, 100%, 58%, 0.3);
   }
 
   h1,
   h2,
   h3,
   h4 {
-    @apply tracking-oryk font-medium;
+    @apply tracking-tight font-sans font-medium;
   }
 }
 
 @layer components {
   .oryk-surface {
-    @apply rounded-2xl border border-white/[0.05] bg-gradient-to-b from-white/[0.02] to-transparent shadow-oryk backdrop-blur-md transition-all duration-[250ms];
+    @apply rounded-lg border border-white/[0.06] bg-surface-primary backdrop-blur-[40px] transition-all duration-[250ms];
+  }
+
+  .oryk-glass {
+    @apply backdrop-blur-[40px] border border-white/[0.06] rounded-lg;
   }
 
   .oryk-surface-hover {
-    @apply hover:border-white/[0.1] hover:bg-surface-hover;
+    @apply hover:border-white/[0.12] hover:bg-surface-hover hover:-translate-y-1 hover:shadow-oryk;
   }
 
   .oryk-button {
-    @apply inline-flex items-center justify-center rounded-full px-5 py-2.5 text-xs font-medium tracking-oryk transition-all duration-[250ms] active:scale-[0.98];
+    @apply inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-xs font-mono tracking-oryk transition-all duration-[250ms] active:scale-[0.98];
   }
 
   .oryk-button-primary {
-    @apply oryk-button bg-white text-black hover:shadow-glow;
+    @apply oryk-button bg-foreground text-background hover:shadow-glow;
   }
 
   .oryk-button-accent {
-    @apply oryk-button bg-accent text-black hover:shadow-[var(--oryk-accent-shadow)];
+    @apply oryk-button bg-accent text-background hover:shadow-[var(--oryk-accent-shadow)];
   }
 
   .oryk-input {
-    @apply w-full rounded-xl border border-white/[0.08] bg-surface-primary px-4 py-3 text-sm text-foreground placeholder:text-text-meta focus:border-accent/40 focus:outline-none focus:ring-1 focus:ring-accent/40 transition-all;
+    @apply w-full rounded-lg border border-white/[0.08] bg-surface-primary px-4 py-3 font-mono text-sm text-foreground placeholder:text-text-meta focus:border-accent/40 focus:outline-none focus:ring-1 focus:ring-accent/40 transition-all;
   }
 }
 
-.no-select {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+/* ØRYK Background Effects */
+.oryk-grid {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(circle at center, black, transparent 80%);
 }
 
-.blurred-watermark {
-  position: fixed;
-  inset: 0;
+.oryk-scanline {
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(to bottom,
+      transparent,
+      hsla(153, 100%, 58%, 0.02),
+      transparent);
+  position: absolute;
+  top: -100px;
+  left: 0;
+  animation: scanline 8s linear infinite;
   pointer-events: none;
-  opacity: 0.04;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: clamp(2rem, 10vw, 6rem);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.4em;
-  mix-blend-mode: plus-lighter;
-  filter: blur(1px);
+}
+
+@keyframes scanline {
+  0% {
+    top: -100px;
+  }
+
+  100% {
+    top: 100%;
+  }
+}
+
+.oryk-star {
+  @apply h-[1.5px] w-[1.5px] rounded-full bg-white opacity-0;
+  animation: breathe var(--star-duration, 4s) ease-in-out infinite;
+  animation-delay: var(--star-delay, 0s);
+}
+
+@keyframes breathe {
+
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  50% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+}
+
+.oryk-orb {
+  @apply fixed rounded-full blur-[100px] pointer-events-none;
+  animation: drift 20s ease-in-out infinite alternate;
+}
+
+@keyframes drift {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  100% {
+    transform: translate(100px, 50px) scale(1.1);
+  }
+}
+
+/* Typography Utilities */
+.text-label {
+  @apply font-mono text-[10px] tracking-[0.4em] uppercase text-text-secondary;
+}
+
+.text-header {
+  @apply font-mono text-[10px] tracking-[0.4em] text-primary uppercase mb-6;
+}
+
+.text-body {
+  @apply font-mono text-sm text-text-secondary leading-relaxed;
+}
+
+.status-dot {
+  @apply h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_10px_#2BFF88];
 }
 
 /* Custom Scrollbar for Luxury Style */
