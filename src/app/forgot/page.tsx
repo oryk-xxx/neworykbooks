@@ -43,33 +43,33 @@ export default function ForgotPasswordPage() {
     };
 
     return (
-        <div className="min-h-screen bg-black text-white flex items-center justify-center p-4">
-            <div className="w-full max-w-md oryk-surface p-10 text-center animate-in fade-in slide-in-from-bottom-8 duration-1000">
-                <div className="mb-10">
-                    <h1 className="text-2xl font-medium tracking-[0.4em] uppercase text-white mb-2">Recuperação</h1>
-                    <p className="text-[10px] tracking-oryk text-text-meta uppercase">Redefinição de Chave</p>
+        <div className="min-h-[calc(100vh-5rem)] flex items-center justify-center p-8 text-center">
+            <div className="w-full max-w-md oryk-surface p-10 relative overflow-hidden">
+                <div className="mb-10 text-center">
+                    <h1 className="text-header mb-2 text-primary">Protocol.Recovery</h1>
+                    <p className="font-mono text-[9px] tracking-oryk text-text-meta uppercase">Module: Security.Protocol.F2</p>
                 </div>
 
-                <p className="text-[11px] tracking-oryk text-white/60 uppercase mb-8 leading-relaxed">
-                    Enviaremos um link de autenticação para o seu endereço de email.
+                <p className="font-mono text-[10px] tracking-oryk text-text-secondary uppercase mb-8 leading-relaxed opacity-70">
+                    Transmission of authentication link to registered uplink.
                 </p>
 
                 {error && (
-                    <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-[11px] uppercase tracking-oryk p-4 rounded-xl mb-8">
+                    <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-[10px] uppercase tracking-oryk p-4 rounded mb-8">
                         {error}
                     </div>
                 )}
 
                 {success && (
-                    <div className="bg-accent/10 border border-accent/20 text-accent text-[11px] uppercase tracking-oryk p-4 rounded-xl mb-8">
+                    <div className="bg-primary/10 border border-primary/20 text-primary text-[10px] uppercase tracking-oryk p-4 rounded mb-8">
                         {success}
                     </div>
                 )}
 
                 <form onSubmit={handleSubmit} className="space-y-6 text-left">
                     <div className="space-y-2">
-                        <label className="text-[9px] uppercase tracking-[0.2em] text-text-meta font-medium ml-1" htmlFor="email">
-                            Endereço de Email
+                        <label className="text-label" htmlFor="email">
+                            Uplink.Email
                         </label>
                         <input
                             id="email"
@@ -87,18 +87,18 @@ export default function ForgotPasswordPage() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="oryk-button-accent w-full py-4 text-[11px] uppercase tracking-[0.2em] font-semibold"
+                            className="oryk-button-accent w-full py-4 text-[10px] uppercase tracking-[0.2em]"
                         >
-                            {loading ? 'Processando...' : 'Solicitar Link →'}
+                            {loading ? 'PROCESSING...' : 'REQUEST UPLINK →'}
                         </button>
                     </div>
                 </form>
 
-                <div className="mt-10 pt-8 border-t border-white/[0.03]">
-                    <p className="text-[10px] tracking-oryk text-text-meta uppercase">
-                        Lembrou sua chave?{' '}
-                        <Link href="/login" className="text-white hover:text-accent transition-colors">
-                            Voltar ao Início
+                <div className="mt-10 pt-8 border-t border-white/[0.06]">
+                    <p className="text-[9px] tracking-oryk text-text-meta uppercase">
+                        Credential found?{' '}
+                        <Link href="/login" className="text-white hover:text-primary transition-colors">
+                            Return.Frontier
                         </Link>
                     </p>
                 </div>

@@ -40,22 +40,22 @@ export default async function ReaderPage(props: {
     .slice(0, 19)} · ØRYK`;
 
   return (
-    <div className="max-w-2xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-6 duration-1000">
+    <div className="max-w-3xl mx-auto space-y-20">
       <AntiLeakGuard watermark={watermark} />
 
       <article className="prose prose-invert prose-oryk max-w-none">
-        <header className="mb-12 border-b border-white/[0.05] pb-8">
-          <div className="flex items-center gap-3 mb-4">
-            <span className="text-[10px] uppercase tracking-[0.3em] text-accent">Página {String(page.order_index).padStart(2, '0')}</span>
-            <span className="h-px w-8 bg-white/10" />
-            <span className="text-[10px] uppercase tracking-oryk text-text-meta">{page.estimated_read_time_minutes || 5} MIN LEITURA</span>
+        <header className="mb-16 border-b border-white/[0.06] pb-12">
+          <div className="flex items-center gap-4 mb-6">
+            <span className="font-mono text-[9px] uppercase tracking-[0.4em] text-primary">Sector.{String(page.order_index).padStart(2, '0')}</span>
+            <span className="h-px w-12 bg-white/[0.06]" />
+            <span className="font-mono text-[9px] uppercase tracking-oryk text-text-meta opacity-50">{page.estimated_read_time_minutes || 5} PROCESS_TIME.MIN</span>
           </div>
-          <h1 className="text-4xl font-medium tracking-oryk-wide text-white uppercase leading-tight">
+          <h1 className="text-header text-white tracking-tight leading-tight">
             {page.slug.split('-').map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
           </h1>
         </header>
 
-        <div className="text-text-secondary leading-relaxed font-light tracking-wide text-lg selection:bg-accent/30">
+        <div className="font-mono text-base text-text-secondary leading-relaxed uppercase opacity-80 selection:bg-primary/20">
           <BlockRenderer blocks={content.blocks} watermark="" />
         </div>
       </article>
@@ -80,16 +80,16 @@ function SummaryForm(props: {
 }) {
   const disabled = !props.unlocked;
   return (
-    <div className="oryk-surface p-10 space-y-8">
-      <div className="space-y-2">
-        <h3 className="text-xl font-medium tracking-oryk text-white uppercase">Sincronização de Conhecimento</h3>
-        <p className="text-xs text-text-secondary tracking-oryk leading-relaxed">
-          Para prosseguir ao próximo volume, sintetize seu entendimento. <br />
-          Mínimo de 80 caracteres.
+    <div className="oryk-surface p-12 space-y-10 relative overflow-hidden bg-primary/2">
+      <div className="space-y-3">
+        <h3 className="text-header-sm text-white">Sync.Knowledge_Core</h3>
+        <p className="font-mono text-[10px] text-text-secondary tracking-oryk leading-relaxed uppercase opacity-60">
+          Terminal requires conceptual synthesis for sector progression. <br />
+          System requirement: Minimum 80 units of synthesis.
         </p>
       </div>
 
-      <form action="/api/progress/submit" method="post" className="space-y-6">
+      <form action="/api/progress/submit" method="post" className="space-y-8">
         <input type="hidden" name="book_id" value={props.bookId} />
         <input type="hidden" name="page_id" value={props.pageId} />
 
@@ -99,29 +99,29 @@ function SummaryForm(props: {
             required
             disabled={disabled}
             minLength={80}
-            className="oryk-input min-h-[160px] py-4 text-sm leading-relaxed resize-none transition-all duration-300 focus:ring-1 focus:ring-accent/20"
-            placeholder="Descreva as principais lições desta seção..."
+            className="oryk-input min-h-[200px] py-6 text-sm leading-relaxed resize-none transition-all duration-300 focus:ring-1 focus:ring-primary/20"
+            placeholder="[ INPUT SYNTHESIS DATA HERE ]"
           />
-          <div className="absolute bottom-3 right-3 text-[9px] uppercase tracking-oryk text-text-meta pointer-events-none group-focus-within:text-accent transition-colors">
-            SYNT_MODE_ACTIVE
+          <div className="absolute bottom-4 right-4 font-mono text-[9px] uppercase tracking-oryk text-text-meta pointer-events-none group-focus-within:text-primary transition-colors opacity-40">
+            SYNT_MODE_ACTIVE // UPLINK_STANDBY
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center gap-6">
+        <div className="flex flex-col sm:flex-row items-center gap-8 pt-4">
           <button
             type="submit"
             disabled={disabled}
-            className={`oryk-button-accent py-4 px-10 text-[10px] uppercase tracking-oryk w-full sm:w-auto ${disabled ? "opacity-20 cursor-not-allowed grayscale" : "shadow-[0_10px_30px_rgba(43,255,136,0.1)]"
+            className={`oryk-button-accent py-4 px-12 text-[10px] w-full sm:w-auto ${disabled ? "opacity-20 cursor-not-allowed grayscale" : ""
               }`}
           >
-            Validar Conhecimento
+            VALIDATE COGNITION →
           </button>
 
           {disabled && (
-            <div className="flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-white/20" />
-              <p className="text-[10px] text-text-meta uppercase tracking-oryk">
-                Aguardando desbloqueio de acesso
+            <div className="flex items-center gap-3">
+              <span className="h-1.5 w-1.5 rounded-full bg-white/20 animate-pulse" />
+              <p className="text-[9px] text-text-meta uppercase tracking-oryk opacity-50">
+                Access pending protocol completion. Sector lock active.
               </p>
             </div>
           )}

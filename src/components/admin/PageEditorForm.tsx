@@ -36,24 +36,24 @@ export function PageEditorForm({ bookId, page, action }: Props) {
 
     return (
         <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr]">
-            <div className="oryk-surface p-8 space-y-8">
-                <form action={action} method="post" className="space-y-8">
-                    <div className="grid grid-cols-[2fr_1fr] gap-4">
-                        <div className="space-y-2">
-                            <label className="text-[9px] uppercase tracking-[0.2em] text-text-meta font-medium ml-1">
-                                Slug de URL
+            <div className="oryk-surface p-10 space-y-10">
+                <form action={action} method="post" className="space-y-10">
+                    <div className="grid grid-cols-[2fr_1fr] gap-6">
+                        <div className="space-y-3">
+                            <label className="font-mono text-[9px] uppercase tracking-oryk-wide text-text-secondary opacity-50 ml-1">
+                                TRANSMISSION_SLUG
                             </label>
                             <input
                                 name="slug"
                                 required
-                                placeholder="introducao-ao-vazio"
+                                placeholder="entry-protocol-01"
                                 className="oryk-input"
                                 defaultValue={page?.slug}
                             />
                         </div>
-                        <div className="space-y-2">
-                            <label className="text-[9px] uppercase tracking-[0.2em] text-text-meta font-medium ml-1">
-                                Ordem
+                        <div className="space-y-3">
+                            <label className="font-mono text-[9px] uppercase tracking-oryk-wide text-text-secondary opacity-50 ml-1">
+                                SEQUENCE_INDEX
                             </label>
                             <input
                                 name="order_index"
@@ -72,10 +72,10 @@ export function PageEditorForm({ bookId, page, action }: Props) {
                     />
 
                     <div className="space-y-4">
-                        <label className="text-[9px] uppercase tracking-[0.2em] text-text-meta font-medium ml-1">
-                            Arquitetura de Blocos
+                        <label className="font-mono text-[9px] uppercase tracking-oryk-wide text-text-secondary opacity-50 ml-1">
+                            STRUCTURE_BLOCK_ARRAY
                         </label>
-                        <div className="border border-white/[0.03] rounded-2xl bg-black/40 p-1">
+                        <div className="border border-white/[0.04] rounded-xl bg-black/40 p-2 shadow-inner">
                             <BlockEditor
                                 initialValue={content}
                                 onChange={setContent}
@@ -83,25 +83,25 @@ export function PageEditorForm({ bookId, page, action }: Props) {
                         </div>
                     </div>
 
-                    <div className="pt-4">
+                    <div className="pt-6">
                         <button
                             type="submit"
-                            className="oryk-button-accent w-full py-4 text-[11px] uppercase tracking-[0.2em] font-semibold"
+                            className="oryk-button-accent w-full py-5 text-[11px] uppercase font-bold tracking-oryk-wide"
                         >
-                            {page ? "Sincronizar Alterações →" : "Gerar Nova Página →"}
+                            {page ? "UPLINK_SYNCHRONIZATION →" : "INIT_NEW_UNIT →"}
                         </button>
                     </div>
                 </form>
             </div>
 
             <div className="space-y-6">
-                <div className="flex items-center justify-between border-b border-white/[0.03] pb-4">
-                    <div className="space-y-1">
-                        <h3 className="text-[10px] uppercase tracking-[0.3em] text-text-meta">Preview</h3>
-                        <p className="text-sm font-light text-white/40">Renderização em Tempo Real</p>
+                <div className="flex items-center justify-between border-b border-white/[0.04] pb-6">
+                    <div className="space-y-2">
+                        <h3 className="font-mono text-[9px] uppercase tracking-oryk-wide text-text-secondary opacity-50">REALTIME_UPLINK_MONITOR</h3>
+                        <p className="text-sm font-light text-white/40 italic">Live decryption preview</p>
                     </div>
                 </div>
-                <div className="oryk-surface p-8 min-h-[600px] bg-black/20 shadow-inner">
+                <div className="oryk-surface p-10 min-h-[600px] border-white/[0.04] bg-black/[0.15]">
                     <div className="prose prose-invert prose-oryk max-w-none">
                         <BlockRenderer blocks={content.blocks} />
                     </div>

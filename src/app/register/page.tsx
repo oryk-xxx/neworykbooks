@@ -54,15 +54,15 @@ export default function RegisterPage() {
     };
 
     return (
-        <div className="min-h-screen bg-black text-white flex items-center justify-center p-4">
-            <div className="w-full max-w-lg oryk-surface p-10 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+        <div className="min-h-[calc(100vh-5rem)] flex items-center justify-center p-8">
+            <div className="w-full max-w-2xl oryk-surface p-10 relative overflow-hidden">
                 <div className="mb-10 text-center">
-                    <h1 className="text-2xl font-medium tracking-[0.4em] uppercase text-white mb-2">ØRYK</h1>
-                    <p className="text-[10px] tracking-oryk text-text-meta uppercase">Criação de Identidade</p>
+                    <h1 className="text-header mb-2 text-primary">Identity.Creation</h1>
+                    <p className="font-mono text-[9px] tracking-oryk text-text-meta uppercase">Module: Security.Protocol.R1</p>
                 </div>
 
                 {error && (
-                    <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-[11px] uppercase tracking-oryk p-4 rounded-xl mb-8 text-center">
+                    <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-[10px] uppercase tracking-oryk p-4 rounded mb-8 text-center">
                         {error}
                     </div>
                 )}
@@ -70,8 +70,8 @@ export default function RegisterPage() {
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
-                            <label className="text-[9px] uppercase tracking-[0.2em] text-text-meta font-medium ml-1" htmlFor="username">
-                                Username
+                            <label className="text-label" htmlFor="username">
+                                Username.Token
                             </label>
                             <input
                                 id="username"
@@ -87,8 +87,8 @@ export default function RegisterPage() {
                             />
                         </div>
                         <div className="space-y-2">
-                            <label className="text-[9px] uppercase tracking-[0.2em] text-text-meta font-medium ml-1" htmlFor="email">
-                                Email
+                            <label className="text-label" htmlFor="email">
+                                Uplink.Email
                             </label>
                             <input
                                 id="email"
@@ -105,8 +105,8 @@ export default function RegisterPage() {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
-                            <label className="text-[9px] uppercase tracking-[0.2em] text-text-meta font-medium ml-1" htmlFor="password">
-                                Senha
+                            <label className="text-label" htmlFor="password">
+                                Security.Hash
                             </label>
                             <input
                                 id="password"
@@ -121,8 +121,8 @@ export default function RegisterPage() {
                             />
                         </div>
                         <div className="space-y-2">
-                            <label className="text-[9px] uppercase tracking-[0.2em] text-text-meta font-medium ml-1" htmlFor="confirmPassword">
-                                Confirmar Senha
+                            <label className="text-label" htmlFor="confirmPassword">
+                                Confirm.Hash
                             </label>
                             <input
                                 id="confirmPassword"
@@ -142,18 +142,18 @@ export default function RegisterPage() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="oryk-button-accent w-full py-4 text-[11px] uppercase tracking-[0.2em] font-semibold"
+                            className="oryk-button-accent w-full py-4 text-[10px] uppercase tracking-[0.2em]"
                         >
-                            {loading ? 'Processando Registro...' : 'Finalizar Cadastro →'}
+                            {loading ? 'PROCESSING REGISTRATION...' : 'FINALIZE IDENTITY →'}
                         </button>
                     </div>
                 </form>
 
-                <div className="mt-10 pt-8 border-t border-white/[0.03] text-center">
-                    <p className="text-[10px] tracking-oryk text-text-meta uppercase">
-                        Já possui uma conta?{' '}
-                        <Link href="/login" className="text-white hover:text-accent transition-colors">
-                            Entrar no Sistema
+                <div className="mt-10 pt-8 border-t border-white/[0.06] text-center">
+                    <p className="text-[9px] tracking-oryk text-text-meta uppercase">
+                        Already have access?{' '}
+                        <Link href="/login" className="text-white hover:text-primary transition-colors">
+                            Authenticate.Terminal
                         </Link>
                     </p>
                 </div>

@@ -10,58 +10,62 @@ export default async function AdminBooksPage() {
     .order("created_at", { ascending: false });
 
   return (
-    <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-      <div className="flex items-center justify-between">
-        <div className="space-y-1">
-          <h2 className="text-[10px] uppercase tracking-[0.3em] text-text-meta">Gerenciamento</h2>
-          <p className="text-xl font-medium tracking-oryk text-white uppercase">Biblioteca do Autor</p>
+    <div className="space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+        <div className="space-y-3">
+          <h2 className="font-mono text-[9px] uppercase tracking-oryk-wide text-text-secondary opacity-50">ADMIN_CONTROL_LAYER</h2>
+          <p className="text-header text-white uppercase">Archive.Repository</p>
         </div>
         <Link
           href="/admin/books/new"
-          className="oryk-button-accent py-3 px-8 text-[10px] uppercase tracking-oryk shadow-[0_10px_30px_rgba(43,255,136,0.1)]"
+          className="oryk-button-accent py-4 px-10 text-[10px] uppercase font-bold self-start md:self-auto"
         >
-          + Novo Volume
+          INIT_NEW_ENTRY +
         </Link>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {books?.map((b: any) => (
           <Link
             key={b.id}
             href={`/admin/books/${b.id}`}
-            className="oryk-surface p-6 group transition-all duration-300 oryk-surface-hover border-white/[0.05]"
+            className="oryk-surface p-8 group transition-all duration-500 overflow-hidden relative"
           >
-            <div className="flex flex-col h-full justify-between gap-6">
-              <div className="space-y-2">
-                <span className="text-[9px] uppercase tracking-[0.3em] text-text-meta">
-                  ID_{b.id.slice(0, 8).toUpperCase()}
+            <div className="flex flex-col h-full justify-between gap-8">
+              <div className="space-y-3">
+                <span className="font-mono text-[9px] uppercase tracking-oryk-wide text-text-secondary opacity-40">
+                  ENTITY_ID: {b.id.slice(0, 8).toUpperCase()}
                 </span>
-                <p className="text-sm font-medium text-white group-hover:text-accent transition-colors leading-relaxed">
+                <p className="font-sans text-base font-medium text-white group-hover:text-primary transition-colors leading-snug uppercase">
                   {b.title}
                 </p>
               </div>
 
-              <div className="flex items-center justify-between pt-4 border-t border-white/[0.03]">
-                <span className={`text-[9px] uppercase tracking-oryk flex items-center gap-1.5 font-light ${b.status === 'published' ? 'text-accent' : 'text-text-meta'
+              <div className="flex items-center justify-between pt-6 border-t border-white/[0.04]">
+                <span className={`font-mono text-[9px] uppercase tracking-oryk flex items-center gap-2 ${b.status === 'published' ? 'text-primary' : 'text-text-secondary opacity-60'
                   }`}>
-                  <span className={`h-1 w-1 rounded-full ${b.status === 'published' ? 'bg-accent shadow-[0_0_8px_rgba(43,255,136,0.5)]' : 'bg-white/20'
+                  <span className={`h-1.5 w-1.5 rounded-full ${b.status === 'published' ? 'bg-primary shadow-[0_0_10px_rgba(43,255,136,0.4)]' : 'bg-white/20'
                     }`} />
-                  {b.status === 'published' ? 'Publicado' : 'Rascunho'}
+                  {b.status === 'published' ? 'OPERATIONAL' : 'DEVELOPMENT'}
                 </span>
 
-                <span className="text-[10px] text-accent opacity-0 group-hover:opacity-100 transition-opacity">
-                  EDITAR →
+                <span className="font-mono text-[9px] text-primary opacity-0 group-hover:opacity-100 transition-all transform translate-x-2 group-hover:translate-x-0">
+                  ACCESS_SYSTEM →
                 </span>
               </div>
+            </div>
+
+            <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity">
+              <span className="font-mono text-[40px] leading-none select-none">Ø</span>
             </div>
           </Link>
         ))}
       </div>
 
       {books && books.length === 0 ? (
-        <div className="py-24 text-center oryk-surface border-dashed">
-          <p className="text-xs text-text-meta uppercase tracking-oryk">
-            Nenhuma obra encontrada no repositório.
+        <div className="py-32 text-center oryk-surface border-dashed opacity-50">
+          <p className="font-mono text-[10px] text-text-secondary uppercase tracking-oryk-wide">
+            REPOSITORY_VACANCY: NO ENTRIES FOUND
           </p>
         </div>
       ) : null}

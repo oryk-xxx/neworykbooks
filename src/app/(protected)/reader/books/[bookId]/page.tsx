@@ -33,69 +33,69 @@ export default async function BookPagesIndex(props: {
   for (const p of prog || []) if (p.unlocked) unlockedSet.add(p.page_id);
 
   return (
-    <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-      <header className="space-y-4">
+    <div className="space-y-12 max-w-7xl mx-auto">
+      <header className="space-y-6">
         <div className="flex items-center gap-4">
           <Link
             href="/reader"
-            className="text-[10px] uppercase tracking-oryk text-text-meta hover:text-white transition-colors"
+            className="text-[10px] uppercase tracking-oryk text-text-meta hover:text-primary transition-colors flex items-center gap-2"
           >
-            ← Voltar para Biblioteca
+            <span className="opacity-50">←</span> TERMINAL.RETURN
           </Link>
         </div>
 
-        <div className="space-y-1">
-          <h1 className="text-4xl font-medium tracking-oryk-wide text-white uppercase leading-tight max-w-2xl">
+        <div className="space-y-2">
+          <h1 className="text-header text-white leading-tight max-w-3xl">
             {book.title}
           </h1>
-          <div className="flex items-center gap-3 pt-2">
-            <span className="h-1 w-1 rounded-full bg-accent" />
-            <p className="text-[10px] text-text-secondary uppercase tracking-[0.2em]">
-              Índice de Conteúdo
+          <div className="flex items-center gap-3 pt-4 border-t border-white/[0.06]">
+            <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+            <p className="text-label text-primary">
+              Index.Transmissions
             </p>
           </div>
         </div>
       </header>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {pages?.map((p: any) => {
           const unlocked = p.order_index === 1 || unlockedSet.has(p.id);
           const cardContent = (
-            <div className="flex flex-col h-full justify-between gap-4">
-              <div className="space-y-1">
-                <span className="text-[9px] uppercase tracking-[0.3em] text-text-meta">
-                  Página {String(p.order_index).padStart(2, '0')}
+            <div className="flex flex-col h-full justify-between gap-6">
+              <div className="space-y-2">
+                <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-text-meta block">
+                  Sector.{String(p.order_index).padStart(2, '0')}
                 </span>
-                <p className={`text-sm font-medium transition-colors ${unlocked ? "text-white group-hover:text-accent" : "text-text-meta"
+                <p className={`text-base font-medium transition-colors tracking-tight ${unlocked ? "text-white group-hover:text-primary" : "text-text-meta"
                   }`}>
                   {p.slug.split('-').map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
                 </p>
               </div>
 
-              <div className="flex items-center justify-between pt-2">
+              <div className="flex items-center justify-between pt-4 border-t border-white/[0.03]">
                 {!unlocked ? (
-                  <span className="text-[9px] uppercase tracking-oryk text-text-meta flex items-center gap-1.5 font-light">
+                  <span className="text-[9px] uppercase tracking-oryk text-text-meta flex items-center gap-2 font-light">
                     <span className="h-1 w-1 rounded-full bg-white/20" />
-                    Conteúdo Bloqueado
+                    Data.Restricted
                   </span>
                 ) : (
-                  <span className="text-[9px] uppercase tracking-oryk text-accent flex items-center gap-1.5 font-light">
-                    <span className="h-1 w-1 rounded-full bg-accent shadow-[0_0_8px_rgba(43,255,136,0.5)]" />
-                    Disponível
+                  <span className="text-[9px] uppercase tracking-oryk text-primary flex items-center gap-2 font-light">
+                    <span className="h-1 w-1 rounded-full bg-primary shadow-[0_0_10px_rgba(43,255,136,0.3)]" />
+                    Data.Resolved
                   </span>
                 )}
                 {unlocked && (
-                  <span className="text-[10px] text-accent opacity-0 group-hover:opacity-100 transition-opacity">
-                    LER →
+                  <span className="font-mono text-[10px] text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                    DOWNLOAD →
                   </span>
                 )}
               </div>
             </div>
           );
 
-          const cardClassName = `oryk-surface p-6 group transition-all duration-300 ${unlocked
-            ? "oryk-surface-hover border-white/[0.05]"
-            : "opacity-40 cursor-not-allowed border-dashed border-white/[0.03]"
+          const cardClassName = `oryk-surface p-8 group relative overflow-hidden transition-all duration-300 ${unlocked
+            ? "oryk-surface-hover border-white/[0.06]"
+            : "opacity-40 cursor-not-allowed border-dashed border-white/[0.04]"
             }`;
 
           if (unlocked) {
@@ -119,9 +119,9 @@ export default async function BookPagesIndex(props: {
       </div>
 
       {pages && pages.length === 0 ? (
-        <div className="py-24 text-center oryk-surface border-dashed">
-          <p className="text-xs text-text-meta uppercase tracking-oryk">
-            Este volume ainda não contém páginas publicadas.
+        <div className="py-24 text-center oryk-surface border-dashed border-white/[0.06]">
+          <p className="text-label opacity-40">
+            Sector is currently void. No transmissions recorded.
           </p>
         </div>
       ) : null}

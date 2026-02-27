@@ -55,29 +55,29 @@ export default function ResetPasswordPage() {
     };
 
     return (
-        <div className="min-h-screen bg-black text-white flex items-center justify-center p-4">
-            <div className="w-full max-w-md oryk-surface p-10 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+        <div className="min-h-[calc(100vh-5rem)] flex items-center justify-center p-8">
+            <div className="w-full max-w-md oryk-surface p-10 relative overflow-hidden">
                 <div className="mb-10 text-center">
-                    <h1 className="text-2xl font-medium tracking-[0.4em] uppercase text-white mb-2">Segurança</h1>
-                    <p className="text-[10px] tracking-oryk text-text-meta uppercase">Nova Chave de Acesso</p>
+                    <h1 className="text-header mb-2 text-primary">Security.Reset</h1>
+                    <p className="font-mono text-[9px] tracking-oryk text-text-meta uppercase">Module: Security.Protocol.RS</p>
                 </div>
 
                 {success && (
-                    <div className="bg-accent/10 border border-accent/20 text-accent text-[11px] uppercase tracking-oryk p-4 rounded-xl mb-8 text-center ring-1 ring-accent/20">
-                        {success} Redirecionando...
+                    <div className="bg-primary/10 border border-primary/20 text-primary text-[10px] uppercase tracking-oryk p-4 rounded mb-8 text-center ring-1 ring-primary/20">
+                        {success} Redirecting...
                     </div>
                 )}
 
                 {error && (
-                    <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-[11px] uppercase tracking-oryk p-4 rounded-xl mb-8 text-center">
+                    <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-[10px] uppercase tracking-oryk p-4 rounded mb-8 text-center">
                         {error}
                     </div>
                 )}
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="space-y-2">
-                        <label className="text-[9px] uppercase tracking-[0.2em] text-text-meta font-medium ml-1" htmlFor="password">
-                            Nova Senha
+                        <label className="text-label" htmlFor="password">
+                            New.Security.Hash
                         </label>
                         <input
                             id="password"
@@ -93,8 +93,8 @@ export default function ResetPasswordPage() {
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-[9px] uppercase tracking-[0.2em] text-text-meta font-medium ml-1" htmlFor="confirmPassword">
-                            Confirmar Nova Senha
+                        <label className="text-label" htmlFor="confirmPassword">
+                            Confirm.Hash
                         </label>
                         <input
                             id="confirmPassword"
@@ -113,18 +113,18 @@ export default function ResetPasswordPage() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="oryk-button-accent w-full py-4 text-[11px] uppercase tracking-[0.2em] font-semibold"
+                            className="oryk-button-accent w-full py-4 text-[10px] uppercase tracking-[0.2em]"
                         >
-                            {loading ? 'Atualizando...' : 'Redefinir Senha →'}
+                            {loading ? 'PROCESSING...' : 'UPDATE HASH →'}
                         </button>
                     </div>
                 </form>
 
-                <div className="mt-10 pt-8 border-t border-white/[0.03] text-center">
-                    <p className="text-[10px] tracking-oryk text-text-meta uppercase">
-                        Prefere voltar?{' '}
-                        <Link href="/login" className="text-white hover:text-accent transition-colors">
-                            Voltar ao Login
+                <div className="mt-10 pt-8 border-t border-white/[0.06] text-center">
+                    <p className="text-[9px] tracking-oryk text-text-meta uppercase">
+                        Abort Protocol?{' '}
+                        <Link href="/login" className="text-white hover:text-primary transition-colors">
+                            Return.Login
                         </Link>
                     </p>
                 </div>

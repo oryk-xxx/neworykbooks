@@ -41,19 +41,19 @@ export default function MFAPage() {
     };
 
     return (
-        <div className="min-h-screen bg-black text-white flex items-center justify-center p-4">
-            <div className="w-full max-w-sm oryk-surface p-10 text-center animate-in fade-in slide-in-from-bottom-8 duration-1000">
+        <div className="min-h-[calc(100vh-5rem)] flex items-center justify-center p-8">
+            <div className="w-full max-w-sm oryk-surface p-10 text-center relative overflow-hidden">
                 <div className="mb-10">
-                    <h1 className="text-2xl font-medium tracking-[0.4em] uppercase text-white mb-2">Segurança</h1>
-                    <p className="text-[10px] tracking-oryk text-text-meta uppercase">Verificação de Identidade</p>
+                    <h1 className="text-header mb-2 text-primary">Identity.Verify</h1>
+                    <p className="font-mono text-[9px] tracking-oryk text-text-meta uppercase">Module: Security.MFA.V3</p>
                 </div>
 
-                <p className="text-[11px] tracking-oryk text-white/60 uppercase mb-8 leading-relaxed">
-                    Insira o código de 8 dígitos enviado ao seu endereço de email.
+                <p className="font-mono text-[10px] tracking-oryk text-text-secondary uppercase mb-8 leading-relaxed opacity-70">
+                    Enter the 8-digit temporal sequence transmitted to your uplink.
                 </p>
 
                 {error && (
-                    <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-[11px] uppercase tracking-oryk p-4 rounded-xl mb-8">
+                    <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-[10px] uppercase tracking-oryk p-4 rounded mb-8">
                         {error}
                     </div>
                 )}
@@ -68,7 +68,7 @@ export default function MFAPage() {
                             maxLength={8}
                             minLength={8}
                             placeholder="00000000"
-                            className="w-full bg-surface-primary border border-white/[0.08] rounded-2xl p-6 text-center text-3xl tracking-[0.4em] font-mono focus:outline-none focus:border-accent/40 focus:ring-1 focus:ring-accent/40 transition-all placeholder:text-white/5"
+                            className="oryk-input text-center text-3xl tracking-[0.4em] p-6"
                             value={pin}
                             onChange={(e) => setPin(e.target.value.replace(/[^0-9]/g, '').slice(0, 8))}
                         />
@@ -77,15 +77,15 @@ export default function MFAPage() {
                     <button
                         type="submit"
                         disabled={loading || pin.length !== 8}
-                        className="oryk-button-accent w-full py-4 text-[11px] uppercase tracking-[0.2em] font-semibold"
+                        className="oryk-button-accent w-full py-4 text-[10px] uppercase tracking-[0.2em]"
                     >
-                        {loading ? 'Validando...' : 'Confirmar Acesso →'}
+                        {loading ? 'VALIDATING SEQUENCE...' : 'CONFIRM ACCESS →'}
                     </button>
                 </form>
 
-                <div className="mt-10 pt-8 border-t border-white/[0.03]">
-                    <p className="text-[9px] tracking-oryk text-text-meta uppercase">
-                        Não recebeu o código? Verifique sua caixa de spam ou aguarde alguns instantes.
+                <div className="mt-10 pt-8 border-t border-white/[0.06]">
+                    <p className="text-[9px] tracking-oryk text-text-meta uppercase opacity-50">
+                        Sequence timeout? Check uplink spam filters or wait for re-transmission.
                     </p>
                 </div>
             </div>

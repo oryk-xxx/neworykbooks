@@ -65,28 +65,28 @@ function LoginForm() {
   };
 
   return (
-    <div className="w-full max-w-md oryk-surface p-10 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+    <div className="w-full max-w-md oryk-surface p-10 relative overflow-hidden">
       <div className="mb-10 text-center">
-        <h1 className="text-2xl font-medium tracking-[0.4em] uppercase text-white mb-2">ØRYK</h1>
-        <p className="text-[10px] tracking-oryk text-text-meta uppercase">Painel de Acesso</p>
+        <h1 className="text-header mb-2 text-primary">System.Authentication</h1>
+        <p className="font-mono text-[9px] tracking-oryk text-text-meta uppercase">Module: Security.Protocol.A8</p>
       </div>
 
       {successMsg && (
-        <div className="bg-accent/10 border border-accent/20 text-accent text-[11px] uppercase tracking-oryk p-4 rounded-xl mb-8">
+        <div className="bg-primary/10 border border-primary/20 text-primary text-[10px] uppercase tracking-oryk p-4 rounded mb-8">
           {successMsg}
         </div>
       )}
 
       {error && (
-        <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-[11px] uppercase tracking-oryk p-4 rounded-xl mb-8">
+        <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-[10px] uppercase tracking-oryk p-4 rounded mb-8">
           {error}
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="space-y-2">
-          <label className="text-[9px] uppercase tracking-[0.2em] text-text-meta font-medium ml-1" htmlFor="identifier">
-            Credencial (Email ou Username)
+          <label className="text-label" htmlFor="identifier">
+            Credential.ID
           </label>
           <input
             id="identifier"
@@ -101,12 +101,12 @@ function LoginForm() {
         </div>
 
         <div className="space-y-2">
-          <div className="flex items-center justify-between ml-1">
-            <label className="text-[9px] uppercase tracking-[0.2em] text-text-meta font-medium" htmlFor="password">
-              Chave de Acesso
+          <div className="flex items-center justify-between">
+            <label className="text-label" htmlFor="password">
+              Access.Key
             </label>
-            <Link href="/forgot" className="text-[9px] uppercase tracking-oryk text-accent/50 hover:text-accent transition-colors">
-              Esqueceu a chave?
+            <Link href="/forgot" className="text-[9px] uppercase tracking-oryk text-primary/40 hover:text-primary transition-colors">
+              Recover?
             </Link>
           </div>
           <input
@@ -124,18 +124,18 @@ function LoginForm() {
           <button
             type="submit"
             disabled={loading}
-            className="oryk-button-accent w-full py-4 text-[11px] uppercase tracking-[0.2em] font-semibold"
+            className="oryk-button-accent w-full py-4 text-[10px] uppercase tracking-[0.2em]"
           >
-            {loading ? 'Validando...' : 'Iniciar Sessão →'}
+            {loading ? 'PROCESSING...' : 'INITIALIZE SESSION →'}
           </button>
         </div>
       </form>
 
-      <div className="mt-10 pt-8 border-t border-white/[0.03] text-center">
-        <p className="text-[10px] tracking-oryk text-text-meta uppercase">
-          Ainda não possui acesso?{' '}
-          <Link href="/register" className="text-white hover:text-accent transition-colors">
-            Registrar-se
+      <div className="mt-10 pt-8 border-t border-white/[0.06] text-center">
+        <p className="text-[9px] tracking-oryk text-text-meta uppercase">
+          Unauthorized?{' '}
+          <Link href="/register" className="text-white hover:text-primary transition-colors">
+            Register.Identity
           </Link>
         </p>
       </div>
@@ -145,8 +145,8 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen bg-black text-white flex items-center justify-center p-4">
-      <Suspense fallback={<div className="text-[10px] uppercase tracking-[0.4em] text-accent animate-pulse">Estabelecendo conexão...</div>}>
+    <div className="min-h-[calc(100vh-5rem)] flex items-center justify-center p-8">
+      <Suspense fallback={<div className="font-mono text-[10px] uppercase tracking-[0.4em] text-primary animate-pulse">Establishing Connection...</div>}>
         <LoginForm />
       </Suspense>
     </div>

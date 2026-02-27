@@ -67,15 +67,15 @@ export default function CheckoutClient({ user, hasAccess, initialPayment, price,
 
     if (!user) {
         return (
-            <div className="oryk-surface p-10 text-center animate-in fade-in slide-in-from-bottom-8 duration-1000">
-                <p className="mb-6 font-mono text-text-secondary tracking-[0.4em] uppercase text-[10px]">
-                    Identificação necessária para transação.
+            <div className="oryk-surface p-12 text-center animate-in fade-in slide-in-from-bottom-8 duration-1000">
+                <p className="mb-8 font-mono text-text-secondary tracking-oryk-wide uppercase text-[9px] opacity-60">
+                    Identity.Validation_Required_For_Protocol_Uplink
                 </p>
                 <Link
                     href="/login?redirectTo=/checkout"
-                    className="oryk-button-primary w-full py-4 text-[10px] uppercase tracking-[0.2em] font-medium"
+                    className="oryk-button-primary w-full py-4 text-[10px] uppercase tracking-oryk font-medium"
                 >
-                    Autenticar-se →
+                    AUTH_PROTOCOL_01 →
                 </Link>
             </div>
         );
@@ -83,19 +83,19 @@ export default function CheckoutClient({ user, hasAccess, initialPayment, price,
 
     if (hasAccess || approved) {
         return (
-            <div className="oryk-surface p-10 text-center border-accent/20 animate-in fade-in zoom-in duration-700">
-                <div className="flex justify-center mb-6">
-                    <div className="h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_15px_rgba(43,255,136,0.6)]" />
+            <div className="oryk-surface p-12 text-center border-primary/20 animate-in fade-in zoom-in duration-700">
+                <div className="flex justify-center mb-8">
+                    <div className="h-2 w-2 rounded-full bg-primary shadow-[0_0_20px_rgba(43,255,136,0.5)]" />
                 </div>
-                <h2 className="font-sans text-xl font-medium tracking-tight uppercase mb-2">Acesso Liberado</h2>
-                <p className="font-mono text-[10px] text-text-secondary tracking-[0.4em] uppercase mb-10">
-                    Sua licença vitalícia está ativa
+                <h2 className="text-header-sm text-white mb-3">Access.Granted</h2>
+                <p className="font-mono text-[9px] text-text-secondary tracking-oryk-wide uppercase mb-12 opacity-60">
+                    Lifetime_protocol_active_status: Operational
                 </p>
                 <Link
                     href="/reader"
-                    className="oryk-button-accent w-full py-4 text-[10px] uppercase tracking-[0.2em] font-semibold"
+                    className="oryk-button-accent w-full py-4 text-[10px] uppercase tracking-oryk font-bold"
                 >
-                    Entrar na Biblioteca
+                    ENTER_ARCHIVE_GATEWAY →
                 </Link>
             </div>
         );
@@ -104,33 +104,33 @@ export default function CheckoutClient({ user, hasAccess, initialPayment, price,
     return (
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-1000">
             {!payment ? (
-                <div className="oryk-surface p-10 text-center">
-                    <h2 className="font-sans text-xl font-medium tracking-tight uppercase mb-8">Licença Vitalícia</h2>
-                    <div className="flex flex-col items-center justify-center gap-1 mb-10">
-                        <div className="flex items-center gap-3">
-                            <span className="font-mono text-text-secondary text-[11px] line-through opacity-50 tracking-wider">R$ {originalPrice}</span>
-                            <span className="font-mono bg-accent/10 text-accent text-[8px] px-2 py-0.5 rounded tracking-[0.15em] font-bold uppercase">
-                                {Math.round((1 - price / originalPrice) * 100)}% OFF
+                <div className="oryk-surface p-12 text-center relative overflow-hidden">
+                    <h2 className="text-header-sm text-white mb-10">CORE_ENTITY_ACCESS</h2>
+                    <div className="flex flex-col items-center justify-center gap-2 mb-12">
+                        <div className="flex items-center gap-4">
+                            <span className="font-mono text-text-secondary text-[11px] line-through opacity-40 tracking-wider">R$ {originalPrice}</span>
+                            <span className="font-mono bg-primary/10 text-primary text-[8px] px-2 py-0.5 rounded tracking-oryk font-bold uppercase">
+                                {Math.round((1 - price / originalPrice) * 100)}% DISCOUNT_APPLIED
                             </span>
                         </div>
-                        <div className="flex items-center gap-3">
-                            <span className="font-sans text-5xl font-medium text-white tracking-tighter">R$ {price}</span>
-                            <span className="font-mono text-text-secondary text-[10px] uppercase tracking-[0.2em] mt-2 opacity-60">pagamento único</span>
+                        <div className="flex items-center gap-4">
+                            <span className="text-header text-white tracking-tighter">R$ {price}</span>
+                            <span className="font-mono text-text-secondary text-[9px] uppercase tracking-oryk-wide mt-2 opacity-50">SINGLE_TRANSACTION</span>
                         </div>
                     </div>
 
                     {error && (
-                        <div className="font-mono bg-red-500/10 border border-red-500/20 text-red-400 text-[10px] p-4 rounded-xl mb-6 uppercase tracking-[0.2em]">
-                            {error}
+                        <div className="font-mono bg-red-500/10 border border-red-500/20 text-red-400 text-[9px] p-5 rounded-xl mb-8 uppercase tracking-oryk-wide">
+                            ERROR: {error}
                         </div>
                     )}
 
                     <button
                         onClick={handleGeneratePix}
                         disabled={loading}
-                        className="w-full oryk-button-accent py-5 text-[11px] uppercase tracking-[0.2em] font-bold"
+                        className="w-full oryk-button-accent py-5 text-[10px] font-bold"
                     >
-                        {loading ? "Processando..." : "Gerar Código PIX →"}
+                        {loading ? "PROCESSING_ENCRYPTION..." : "GENERATE_TRANSACTION_KEY →"}
                     </button>
 
                     <p className="mt-8 font-mono text-[9px] text-text-meta uppercase tracking-[0.4em] leading-relaxed opacity-50">
@@ -139,55 +139,55 @@ export default function CheckoutClient({ user, hasAccess, initialPayment, price,
                 </div>
             ) : (
                 <div className="space-y-6">
-                    <div className="oryk-surface p-8">
+                    <div className="oryk-surface p-10">
                         <div className="flex flex-col items-center">
-                            <div className="mb-10 rounded-3xl bg-white p-5 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] ring-1 ring-white/10">
-                                <QRCodeSVG value={payment.qr_code} size={220} level="M" />
+                            <div className="mb-12 rounded-2xl bg-white p-6 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.8)] ring-1 ring-white/20">
+                                <QRCodeSVG value={payment.qr_code} size={240} level="M" />
                             </div>
 
-                            <div className="w-full space-y-6">
-                                <div className="space-y-2">
-                                    <label className="font-mono text-[10px] uppercase tracking-[0.4em] text-text-secondary px-1 font-medium opacity-60">
-                                        PIX Copia e Cola
+                            <div className="w-full space-y-8">
+                                <div className="space-y-3">
+                                    <label className="font-mono text-[9px] uppercase tracking-oryk-wide text-text-secondary px-1 opacity-50">
+                                        Transaction.Key_Direct_Input
                                     </label>
                                     <div className="group relative">
                                         <input
                                             readOnly
                                             value={payment.qr_code}
-                                            className="oryk-input pr-14 font-mono text-[11px] truncate border-white/[0.08] bg-black/40"
+                                            className="oryk-input pr-16 font-mono text-[11px] truncate bg-primary/[0.02]"
                                         />
                                         <button
                                             onClick={copyToClipboard}
-                                            className="absolute right-2 top-1/2 -translate-y-1/2 p-2.5 text-text-secondary hover:text-accent transition-all duration-300"
+                                            className="absolute right-3 top-1/2 -translate-y-1/2 p-3 text-text-secondary hover:text-primary transition-all duration-300"
                                         >
-                                            {copied ? <CheckCircle2 size={18} className="text-accent" /> : <Copy size={18} />}
+                                            {copied ? <CheckCircle2 size={18} className="text-primary" /> : <Copy size={18} />}
                                         </button>
                                     </div>
                                 </div>
 
-                                <div className="pt-2">
+                                <div className="pt-4">
                                     <a
                                         href={payment.ticket_url || "#"}
                                         target="_blank"
                                         rel="noreferrer"
-                                        className="w-full h-14 flex items-center justify-center bg-white/[0.03] border border-white/[0.08] rounded-2xl font-mono text-[10px] uppercase tracking-[0.4em] hover:bg-white/[0.06] transition-all text-text-secondary hover:text-primary"
+                                        className="w-full h-14 flex items-center justify-center bg-white/[0.03] border border-white/[0.06] rounded-xl font-mono text-[9px] uppercase tracking-oryk-wide hover:bg-white/[0.06] transition-all text-text-secondary hover:text-primary"
                                     >
-                                        Ver detalhes no Mercado Pago
+                                        EXTERNAL_LEDGER_VIEW →
                                     </a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div className="oryk-surface p-6 text-center border-accent/10">
-                        <div className="flex justify-center mb-4">
-                            <div className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse shadow-[0_0_10px_#2BFF88]" />
+                    <div className="oryk-surface p-8 text-center border-primary/10">
+                        <div className="flex justify-center mb-6">
+                            <div className="h-2 w-2 rounded-full bg-primary animate-pulse shadow-[0_0_15px_#2BFF88]" />
                         </div>
-                        <p className="font-mono text-[10px] text-text-secondary tracking-[0.4em] uppercase mb-1">
-                            Aguardando confirmação
+                        <p className="font-mono text-[9px] text-text-secondary tracking-oryk-wide uppercase mb-2 opacity-60">
+                            Sync.Pending_Confirmation
                         </p>
-                        <p className="font-mono text-[9px] text-text-meta uppercase tracking-[0.2em] opacity-60">
-                            Detector de pagamento ativo • 10s
+                        <p className="font-mono text-[8px] text-text-meta uppercase tracking-oryk opacity-30">
+                            Transaction_Detector: Active // Interval: 10s
                         </p>
                     </div>
                 </div>
