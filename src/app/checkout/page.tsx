@@ -1,3 +1,6 @@
+"use client";
+
+import React, { useState, useEffect } from "react";
 import { env } from "../../lib/env";
 import { createSupabaseServerClient } from "@/lib/supabaseServer";
 import { QRCodeSVG } from "qrcode.react";

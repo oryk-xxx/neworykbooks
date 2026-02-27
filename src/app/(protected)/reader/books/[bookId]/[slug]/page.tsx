@@ -1,3 +1,4 @@
+import React from "react";
 import { notFound } from "next/navigation";
 import { BlockRenderer } from "@/components/editor/BlockRenderer";
 import { createSupabaseServerClient } from "@/lib/supabaseServer";

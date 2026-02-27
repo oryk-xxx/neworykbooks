@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 
 export default function ForgotPasswordPage() {
@@ -44,50 +44,64 @@ export default function ForgotPasswordPage() {
 
     return (
         <div className="min-h-screen bg-black text-white flex items-center justify-center p-4">
-            <div className="w-full max-w-sm bg-[#0a0a0a] border border-neutral-800 rounded-xl shadow-2xl p-8 text-center">
-                <h1 className="text-2xl font-light mb-2">Forgot Password</h1>
-                <p className="text-neutral-400 mb-8 text-sm">We'll send you a password reset link.</p>
+            <div className="w-full max-w-md oryk-surface p-10 text-center animate-in fade-in slide-in-from-bottom-8 duration-1000">
+                <div className="mb-10">
+                    <h1 className="text-2xl font-medium tracking-[0.4em] uppercase text-white mb-2">Recuperação</h1>
+                    <p className="text-[10px] tracking-oryk text-text-meta uppercase">Redefinição de Chave</p>
+                </div>
+
+                <p className="text-[11px] tracking-oryk text-white/60 uppercase mb-8 leading-relaxed">
+                    Enviaremos um link de autenticação para o seu endereço de email.
+                </p>
 
                 {error && (
-                    <div className="bg-red-500/10 border border-red-500/50 text-red-500 text-sm p-3 rounded-md mb-6">
+                    <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-[11px] uppercase tracking-oryk p-4 rounded-xl mb-8">
                         {error}
                     </div>
                 )}
 
                 {success && (
-                    <div className="bg-green-500/10 border border-green-500/50 text-green-500 text-sm p-3 rounded-md mb-6">
+                    <div className="bg-accent/10 border border-accent/20 text-accent text-[11px] uppercase tracking-oryk p-4 rounded-xl mb-8">
                         {success}
                     </div>
                 )}
 
-                <form onSubmit={handleSubmit} className="space-y-4 text-left">
-                    <div>
-                        <label className="block text-xs text-neutral-500 mb-1" htmlFor="email">EMAIL</label>
+                <form onSubmit={handleSubmit} className="space-y-6 text-left">
+                    <div className="space-y-2">
+                        <label className="text-[9px] uppercase tracking-[0.2em] text-text-meta font-medium ml-1" htmlFor="email">
+                            Endereço de Email
+                        </label>
                         <input
                             id="email"
                             name="email"
                             type="email"
                             required
-                            className="w-full bg-neutral-900 border border-neutral-800 rounded-md p-3 text-sm focus:outline-none focus:border-neutral-500 transition-colors"
+                            placeholder="seu@email.com"
+                            className="oryk-input"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
 
-                    <button
-                        type="submit"
-                        disabled={loading}
-                        className="w-full bg-white text-black font-medium p-3 rounded-md mt-6 hover:bg-neutral-200 transition-colors disabled:opacity-50"
-                    >
-                        {loading ? 'Sending...' : 'Send Link'}
-                    </button>
+                    <div className="pt-4">
+                        <button
+                            type="submit"
+                            disabled={loading}
+                            className="oryk-button-accent w-full py-4 text-[11px] uppercase tracking-[0.2em] font-semibold"
+                        >
+                            {loading ? 'Processando...' : 'Solicitar Link →'}
+                        </button>
+                    </div>
                 </form>
 
-                <p className="text-neutral-500 text-sm mt-6 text-center">
-                    <Link href="/login" className="text-white hover:underline">
-                        Back to login
-                    </Link>
-                </p>
+                <div className="mt-10 pt-8 border-t border-white/[0.03]">
+                    <p className="text-[10px] tracking-oryk text-text-meta uppercase">
+                        Lembrou sua chave?{' '}
+                        <Link href="/login" className="text-white hover:text-accent transition-colors">
+                            Voltar ao Início
+                        </Link>
+                    </p>
+                </div>
             </div>
         </div>
     );

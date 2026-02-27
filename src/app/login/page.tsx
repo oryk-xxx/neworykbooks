@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, Suspense } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
@@ -65,41 +65,48 @@ function LoginForm() {
   };
 
   return (
-    <div className="w-full max-w-md bg-[#0a0a0a] border border-neutral-800 rounded-xl shadow-2xl p-8">
-      <h1 className="text-3xl font-light mb-2">Login</h1>
-      <p className="text-neutral-400 mb-8 text-sm">Acesse o seu painel ØRYK</p>
+    <div className="w-full max-w-md oryk-surface p-10 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+      <div className="mb-10 text-center">
+        <h1 className="text-2xl font-medium tracking-[0.4em] uppercase text-white mb-2">ØRYK</h1>
+        <p className="text-[10px] tracking-oryk text-text-meta uppercase">Painel de Acesso</p>
+      </div>
 
       {successMsg && (
-        <div className="bg-green-500/10 border border-green-500/50 text-green-500 text-sm p-3 rounded-md mb-6">
+        <div className="bg-accent/10 border border-accent/20 text-accent text-[11px] uppercase tracking-oryk p-4 rounded-xl mb-8">
           {successMsg}
         </div>
       )}
 
       {error && (
-        <div className="bg-red-500/10 border border-red-500/50 text-red-500 text-sm p-3 rounded-md mb-6">
+        <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-[11px] uppercase tracking-oryk p-4 rounded-xl mb-8">
           {error}
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block text-xs text-neutral-500 mb-1" htmlFor="identifier">EMAIL OR USERNAME</label>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="space-y-2">
+          <label className="text-[9px] uppercase tracking-[0.2em] text-text-meta font-medium ml-1" htmlFor="identifier">
+            Credencial (Email ou Username)
+          </label>
           <input
             id="identifier"
             name="identifier"
             type="text"
             required
-            className="w-full bg-neutral-900 border border-neutral-800 rounded-md p-3 text-sm focus:outline-none focus:border-neutral-500 transition-colors"
+            placeholder="identidade@oryk.systems"
+            className="oryk-input"
             value={formData.identifier}
             onChange={handleChange}
           />
         </div>
 
-        <div>
-          <div className="flex items-center justify-between mb-1">
-            <label className="block text-xs text-neutral-500" htmlFor="password">PASSWORD</label>
-            <Link href="/forgot" className="text-xs text-neutral-400 hover:text-white transition-colors">
-              Forgot password?
+        <div className="space-y-2">
+          <div className="flex items-center justify-between ml-1">
+            <label className="text-[9px] uppercase tracking-[0.2em] text-text-meta font-medium" htmlFor="password">
+              Chave de Acesso
+            </label>
+            <Link href="/forgot" className="text-[9px] uppercase tracking-oryk text-accent/50 hover:text-accent transition-colors">
+              Esqueceu a chave?
             </Link>
           </div>
           <input
@@ -107,27 +114,31 @@ function LoginForm() {
             name="password"
             type="password"
             required
-            className="w-full bg-neutral-900 border border-neutral-800 rounded-md p-3 text-sm focus:outline-none focus:border-neutral-500 transition-colors"
+            className="oryk-input"
             value={formData.password}
             onChange={handleChange}
           />
         </div>
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full bg-white text-black font-medium p-3 rounded-md mt-6 hover:bg-neutral-200 transition-colors disabled:opacity-50"
-        >
-          {loading ? 'Authenticating...' : 'Sign In'}
-        </button>
+        <div className="pt-4">
+          <button
+            type="submit"
+            disabled={loading}
+            className="oryk-button-accent w-full py-4 text-[11px] uppercase tracking-[0.2em] font-semibold"
+          >
+            {loading ? 'Validando...' : 'Iniciar Sessão →'}
+          </button>
+        </div>
       </form>
 
-      <p className="text-neutral-500 text-sm mt-6 text-center">
-        Don't have an account?{' '}
-        <Link href="/register" className="text-white hover:underline">
-          Register here
-        </Link>
-      </p>
+      <div className="mt-10 pt-8 border-t border-white/[0.03] text-center">
+        <p className="text-[10px] tracking-oryk text-text-meta uppercase">
+          Ainda não possui acesso?{' '}
+          <Link href="/register" className="text-white hover:text-accent transition-colors">
+            Registrar-se
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }
@@ -135,7 +146,7 @@ function LoginForm() {
 export default function LoginPage() {
   return (
     <div className="min-h-screen bg-black text-white flex items-center justify-center p-4">
-      <Suspense fallback={<div className="text-neutral-500 text-sm animate-pulse">Loading login form...</div>}>
+      <Suspense fallback={<div className="text-[10px] uppercase tracking-[0.4em] text-accent animate-pulse">Estabelecendo conexão...</div>}>
         <LoginForm />
       </Suspense>
     </div>
