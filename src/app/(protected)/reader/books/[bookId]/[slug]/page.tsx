@@ -9,9 +9,9 @@ export default async function ReaderPage(props: {
 }) {
   const supabase = createSupabaseServerClient();
   const {
-    data: { session }
-  } = await supabase.auth.getSession();
-  if (!session) return null;
+    data: { user }
+  } = await supabase.auth.getUser();
+  if (!user) return null;
 
   const { data: page } = await supabase
     .from("pages")
@@ -27,14 +27,14 @@ export default async function ReaderPage(props: {
   const { data: progress } = await supabase
     .from("progress")
     .select("*")
-    .eq("user_id", session.user.id)
+    .eq("user_id", user.id)
     .eq("page_id", page.id)
     .maybeSingle();
 
   const unlocked = progress?.unlocked === true || page.order_index === 1;
 
   const content = page.content as PageContent;
-  const watermark = `${session.user.id.slice(0, 8)} · ${new Date()
+  const watermark = `${user.id.slice(0, 8)} · ${new Date()
     .toISOString()
     .slice(0, 19)} · ØRYK`;
 

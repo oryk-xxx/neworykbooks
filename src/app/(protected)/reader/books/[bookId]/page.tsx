@@ -6,9 +6,9 @@ export default async function BookPagesIndex(props: {
 }) {
   const supabase = createSupabaseServerClient();
   const {
-    data: { session }
-  } = await supabase.auth.getSession();
-  if (!session) return null;
+    data: { user }
+  } = await supabase.auth.getUser();
+  if (!user) return null;
 
   const { data: book } = await supabase
     .from("books")
@@ -26,7 +26,7 @@ export default async function BookPagesIndex(props: {
   const { data: prog } = await supabase
     .from("progress")
     .select("page_id, unlocked, score")
-    .eq("user_id", session.user.id)
+    .eq("user_id", user.id)
     .eq("book_id", book.id);
 
   const unlockedSet = new Set<string>();
@@ -41,12 +41,11 @@ export default async function BookPagesIndex(props: {
           return (
             <Link
               key={p.id}
-              href={`/reader/books/${book.id}/page/${p.slug}`}
-              className={`rounded-xl border bg-black/60 p-3 text-xs ${
-                unlocked
-                  ? "border-borderSubtle/80 text-zinc-200"
-                  : "border-zinc-800 text-zinc-500"
-              }`}
+              href={`/reader/books/${book.id}/${p.slug}`}
+              className={`rounded-xl border bg-black/60 p-3 text-xs ${unlocked
+                ? "border-borderSubtle/80 text-zinc-200"
+                : "border-zinc-800 text-zinc-500"
+                }`}
             >
               <div className="flex items-center justify-between">
                 <span>Página {p.order_index}</span>
