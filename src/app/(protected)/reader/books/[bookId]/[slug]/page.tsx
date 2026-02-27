@@ -51,7 +51,7 @@ export default async function ReaderPage(props: {
             <span className="text-[10px] uppercase tracking-oryk text-text-meta">{page.estimated_read_time_minutes || 5} MIN LEITURA</span>
           </div>
           <h1 className="text-4xl font-medium tracking-oryk-wide text-white uppercase leading-tight">
-            {page.slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+            {page.slug.split('-').map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
           </h1>
         </header>
 
