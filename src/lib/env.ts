@@ -4,6 +4,8 @@ export const env = {
   supabaseAnonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "",
   supabaseServiceRoleKey: process.env.SUPABASE_SERVICE_ROLE_KEY || "",
   mercadoPagoAccessToken: process.env.MERCADOPAGO_ACCESS_TOKEN || "",
-  mercadoPagoWebhookSecret: process.env.MERCADOPAGO_WEBHOOK_SECRET || ""
+  mercadoPagoWebhookSecret: process.env.MERCADOPAGO_WEBHOOK_SECRET || "",
+  paymentAmount: Number(process.env.NEXT_PUBLIC_PAYMENT_AMOUNT || 7),
+  originalAmount: Number(process.env.NEXT_PUBLIC_PAYMENT_ORIGINAL_AMOUNT || 19)
 };
 

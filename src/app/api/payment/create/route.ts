@@ -20,7 +20,7 @@ export async function POST() {
   }
 
   const payload = {
-    transaction_amount: 7,
+    transaction_amount: env.paymentAmount,
     description: "Acesso vitalício ØRYK Books",
     payment_method_id: "pix",
     payer: {

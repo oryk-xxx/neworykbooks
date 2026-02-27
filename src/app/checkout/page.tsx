@@ -1,6 +1,6 @@
-import React from "react";
 import { createSupabaseServerClient } from "@/lib/supabaseServer";
 import CheckoutClient from "@/components/checkout/CheckoutClient";
+import { env } from "@/lib/env";
 
 export const dynamic = "force-dynamic";
 
@@ -35,7 +35,12 @@ export default async function CheckoutPage() {
         </div>
       </div>
 
-      <CheckoutClient user={user} hasAccess={hasAccess} />
+      <CheckoutClient
+        user={user}
+        hasAccess={hasAccess}
+        price={env.paymentAmount}
+        originalPrice={env.originalAmount}
+      />
 
       <div className="mt-20 text-center opacity-30 animate-in fade-in duration-1000 delay-500">
         <p className="text-[9px] tracking-[0.4em] uppercase text-text-meta">

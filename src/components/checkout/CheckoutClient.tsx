@@ -9,9 +9,11 @@ interface CheckoutClientProps {
     user: any;
     hasAccess: boolean;
     initialPayment?: any;
+    price: number;
+    originalPrice: number;
 }
 
-export default function CheckoutClient({ user, hasAccess, initialPayment }: CheckoutClientProps) {
+export default function CheckoutClient({ user, hasAccess, initialPayment, price, originalPrice }: CheckoutClientProps) {
     const [payment, setPayment] = useState(initialPayment);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
@@ -104,9 +106,17 @@ export default function CheckoutClient({ user, hasAccess, initialPayment }: Chec
             {!payment ? (
                 <div className="oryk-surface p-10 text-center">
                     <h2 className="text-xl font-medium tracking-[0.3em] uppercase mb-8">Licença Vitalícia</h2>
-                    <div className="flex items-center justify-center gap-3 mb-10">
-                        <span className="text-5xl font-medium text-white tracking-tighter">R$ 7</span>
-                        <span className="text-text-secondary text-[10px] uppercase tracking-oryk mt-2">pagamento único</span>
+                    <div className="flex flex-col items-center justify-center gap-1 mb-10">
+                        <div className="flex items-center gap-2">
+                            <span className="text-text-secondary text-sm line-through opacity-50">R$ {originalPrice}</span>
+                            <span className="bg-accent/10 text-accent text-[9px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">
+                                {Math.round((1 - price / originalPrice) * 100)}% OFF
+                            </span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                            <span className="text-5xl font-medium text-white tracking-tighter">R$ {price}</span>
+                            <span className="text-text-secondary text-[10px] uppercase tracking-oryk mt-2">pagamento único</span>
+                        </div>
                     </div>
 
                     {error && (
