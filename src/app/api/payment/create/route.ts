@@ -27,7 +27,7 @@ export async function POST() {
       email: user.email || "user@example.com",
       first_name: user.user_metadata?.name || "Usuário"
     },
-    notification_url: `${env.siteUrl}/api/payment/webhook`
+    ...(env.siteUrl && !env.siteUrl.includes("localhost") ? { notification_url: `${env.siteUrl}/api/payment/webhook` } : {})
   };
 
   const mpRes = await fetch("https://api.mercadopago.com/v1/payments", {
