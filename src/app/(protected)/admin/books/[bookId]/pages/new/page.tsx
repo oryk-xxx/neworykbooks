@@ -1,3 +1,5 @@
+import React from "react";
+import Link from "next/link";
 import { PageEditorForm } from "@/components/admin/PageEditorForm";
 
 export default async function NewPage(props: { params: { bookId: string } }) {

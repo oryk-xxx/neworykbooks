@@ -1,3 +1,5 @@
+import React from "react";
+import Link from "next/link";
 import { createSupabaseServerClient } from "@/lib/supabaseServer";
 
 export default async function NewBookPage() {

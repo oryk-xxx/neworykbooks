@@ -1,3 +1,5 @@
+import React from "react";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageEditorForm } from "@/components/admin/PageEditorForm";
 import { createSupabaseServerClient } from "@/lib/supabaseServer";
