@@ -4,8 +4,8 @@ import { createSupabaseServerClient } from "@/lib/supabaseServer";
 export async function POST(request: Request) {
   const supabase = createSupabaseServerClient();
   const {
-    data: { session }
-  } = await supabase.auth.getSession();
+    data: { user }
+  } = await supabase.auth.getUser();
   const ip =
     (request.headers.get("x-forwarded-for") || "").split(",")[0]?.trim() || "";
   const ua = request.headers.get("user-agent") || "";
@@ -15,7 +15,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false }, { status: 400 });
   }
   await supabase.from("logs").insert({
-    user_id: session?.user.id || null,
+    user_id: user?.id || null,
     action,
     ip,
     user_agent: ua

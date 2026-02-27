@@ -13,9 +13,9 @@ const bodySchema = z.object({
 export async function POST(request: Request) {
   const supabase = createSupabaseServerClient();
   const {
-    data: { session }
-  } = await supabase.auth.getSession();
-  if (!session) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+    data: { user }
+  } = await supabase.auth.getUser();
+  if (!user) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
 
   const form = await request.formData();
   const payload = {
@@ -40,7 +40,7 @@ export async function POST(request: Request) {
   const { data: prev } = await supabase
     .from("progress")
     .select("*")
-    .eq("user_id", session.user.id)
+    .eq("user_id", user.id)
     .eq("page_id", payload.page_id)
     .maybeSingle();
 
@@ -75,7 +75,7 @@ export async function POST(request: Request) {
   await supabase
     .from("progress")
     .upsert({
-      user_id: session.user.id,
+      user_id: user.id,
       book_id: payload.book_id,
       page_id: payload.page_id,
       unlocked: approved,

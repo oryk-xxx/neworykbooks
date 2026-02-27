@@ -47,12 +47,14 @@ async function createPixPayment(user: any) {
 
   const qr = json?.point_of_interaction?.transaction_data?.qr_code;
   const qrBase64 = json?.point_of_interaction?.transaction_data?.qr_code_base64;
+  const ticketUrl = json?.point_of_interaction?.transaction_data?.ticket_url;
 
   return {
     id: String(json.id),
     status: json.status,
     qr_code: qr,
-    qr_code_base64: qrBase64
+    qr_code_base64: qrBase64,
+    ticket_url: ticketUrl
   };
 }
 
@@ -130,8 +132,20 @@ export default async function CheckoutPage() {
             </p>
             <p className="mt-3 text-zinc-400">
               Após aprovado, seu acesso será liberado automaticamente. Esta página
-              atualiza a cada 5 segundos.
+              atualiza a cada 10 segundos.
             </p>
+            {payment.ticket_url && (
+              <div className="mt-4">
+                <a
+                  href={payment.ticket_url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex w-full justify-center rounded-full border border-accent/60 bg-accent/10 px-4 py-2 text-xs font-medium text-accent hover:bg-accent/20"
+                >
+                  Abrir no Mercado Pago (Link)
+                </a>
+              </div>
+            )}
           </div>
         </div>
       ) : null}
@@ -145,11 +159,11 @@ export default async function CheckoutPage() {
 
 async function RefreshStatus({ paymentId }: { paymentId: string }) {
   const res = await fetch(`${env.siteUrl}/api/payment/status?id=${paymentId}`, {
-    cache: "no-store"
+    cache: "no-store",
+    next: { revalidate: 0 }
   });
   const data = res.ok ? await res.json() : null;
   const approved = data?.status === "approved";
-  const isPending = data?.status === "pending";
 
   if (approved) {
     return (
@@ -166,6 +180,6 @@ async function RefreshStatus({ paymentId }: { paymentId: string }) {
   }
 
   return (
-    <meta httpEquiv="refresh" content="5" />
+    <meta httpEquiv="refresh" content="10" />
   );
 }

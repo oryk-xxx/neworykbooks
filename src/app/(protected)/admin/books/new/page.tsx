@@ -2,7 +2,7 @@ import { createSupabaseServerClient } from "@/lib/supabaseServer";
 
 export default async function NewBookPage() {
   const supabase = createSupabaseServerClient();
-  await supabase.auth.getSession();
+  await supabase.auth.getUser();
 
   return (
     <form action="/admin/books/new/action" method="post" className="space-y-3">

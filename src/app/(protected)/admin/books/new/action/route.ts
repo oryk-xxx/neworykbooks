@@ -4,9 +4,9 @@ import { createSupabaseServerClient } from "@/lib/supabaseServer";
 export async function POST(request: Request) {
   const supabase = createSupabaseServerClient();
   const {
-    data: { session }
-  } = await supabase.auth.getSession();
-  if (!session) return NextResponse.redirect(new URL("/login", request.url));
+    data: { user }
+  } = await supabase.auth.getUser();
+  if (!user) return NextResponse.redirect(new URL("/login", request.url));
 
   const form = await request.formData();
   const title = String(form.get("title") || "");
