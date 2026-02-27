@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { env } from "../../../../lib/env";
+import { createSupabaseServiceRoleClient } from "@/lib/supabaseServer";
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
@@ -19,6 +20,19 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "mp error" }, { status: 500 });
   }
   const json = await res.json();
-  return NextResponse.json({ status: json.status });
+  const status = json.status;
+
+  if (status === "approved") {
+    const supabase = createSupabaseServiceRoleClient();
+    await supabase
+      .from("entitlements")
+      .update({
+        active: true,
+        updated_at: new Date().toISOString()
+      })
+      .eq("last_payment_id", id);
+  }
+
+  return NextResponse.json({ status });
 }
 

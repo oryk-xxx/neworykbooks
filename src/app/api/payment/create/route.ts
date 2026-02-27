@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { env } from "../../../../lib/env";
-import { createSupabaseServerClient } from "@/lib/supabaseServer";
+import { createSupabaseServerClient, createSupabaseServiceRoleClient } from "@/lib/supabaseServer";
 
 export async function POST() {
   const supabase = createSupabaseServerClient();
@@ -50,8 +50,9 @@ export async function POST() {
   }
 
   const json = await mpRes.json();
+  const serviceSupabase = createSupabaseServiceRoleClient();
 
-  await supabase
+  await serviceSupabase
     .from("entitlements")
     .upsert({
       user_id: user.id,
