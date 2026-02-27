@@ -41,6 +41,7 @@ export async function POST() {
 
   if (!mpRes.ok) {
     const errText = await mpRes.text();
+    console.error("MERCADO PAGO API ERROR:", errText);
     return NextResponse.json(
       { error: "Falha Mercado Pago", details: errText },
       { status: 500 }
