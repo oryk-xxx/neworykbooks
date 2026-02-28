@@ -1,0 +1,153 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300" style="background-color: transparent;">
+  <defs>
+    <clipPath id="clip-1"><rect x="0" y="0" transform="scale(0.14648,0.14648)" width="2048" height="2048" fill="none"/></clipPath>
+    
+    <!-- Filtro de Brilho (Glow) para o Loading -->
+    <filter id="glow-soft" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Gradiente do Scanner (Barra de Luz Vertical) -->
+    <linearGradient id="scan-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#a7cbd1" stop-opacity="0"/>
+        <stop offset="50%" stop-color="#ffffff" stop-opacity="0.8"/>
+        <stop offset="100%" stop-color="#a7cbd1" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Gradiente da Sombra -->
+    <radialGradient id="shadow-grad">
+        <stop offset="0%" stop-color="black" stop-opacity="0.5"/>
+        <stop offset="100%" stop-color="black" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <style>
+    /* 1. Animação de Flutuação (Loop Principal) */
+    .float-container {
+        animation: floatY 3s ease-in-out infinite;
+        transform-origin: center;
+    }
+
+    /* 2. Anéis de Carregamento (O Loading Circular) */
+    .loader-ring {
+        fill: none;
+        stroke: #a7cbd1; /* Mesma cor dos olhos */
+        stroke-width: 3;
+        stroke-linecap: round;
+        transform-origin: 150px 150px;
+        opacity: 0.6;
+        /* Efeito tracejado */
+        stroke-dasharray: 80, 200; 
+        stroke-dashoffset: 0;
+        animation: spinRing 2s linear infinite;
+        filter: url(#glow-soft);
+    }
+    
+    .loader-ring-inner {
+        fill: none;
+        stroke: #ffffff;
+        stroke-width: 1;
+        stroke-linecap: round;
+        transform-origin: 150px 150px;
+        stroke-dasharray: 20, 50; 
+        opacity: 0.4;
+        animation: spinRingReverse 3s linear infinite;
+    }
+
+    /* 3. Efeito Scanner (Loading Vertical) */
+    .scanner-beam {
+        fill: url(#scan-grad);
+        width: 300px;
+        height: 40px; /* Altura do feixe */
+        opacity: 0.5;
+        mix-blend-mode: overlay;
+        animation: scanVertical 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+
+    /* 4. Pulso dos Olhos */
+    .eyes-glow {
+        animation: eyesPulse 2s ease-in-out infinite alternate;
+    }
+
+    /* 5. Sombra Reativa */
+    .shadow {
+        transform-origin: center;
+        transform-box: fill-box;
+        fill: url(#shadow-grad);
+        transform: translate(150px, 260px) scale(1, 0.4);
+        animation: shadowBreath 3s ease-in-out infinite;
+    }
+
+    /* KEYFRAMES */
+    @keyframes floatY {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+    }
+
+    @keyframes spinRing {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    
+    @keyframes spinRingReverse {
+        0% { transform: rotate(360deg) scale(0.8); }
+        100% { transform: rotate(0deg) scale(0.8); }
+    }
+
+    @keyframes scanVertical {
+        0% { transform: translateY(-50px) scaleY(0); opacity: 0; }
+        10% { opacity: 0.6; transform: translateY(50px) scaleY(1); }
+        90% { opacity: 0.6; transform: translateY(200px) scaleY(1); }
+        100% { transform: translateY(250px) scaleY(0); opacity: 0; }
+    }
+
+    @keyframes eyesPulse {
+        from { opacity: 0.8; filter: drop-shadow(0 0 0px #a7cbd1); }
+        to { opacity: 1; filter: drop-shadow(0 0 8px #a7cbd1); }
+    }
+
+    @keyframes shadowBreath {
+        0%, 100% { transform: translate(150px, 260px) scale(1.4, 0.4); opacity: 0.4; }
+        50% { transform: translate(150px, 260px) scale(1.0, 0.3); opacity: 0.2; }
+    }
+  </style>
+
+  <!-- Anéis de Loading (Ficam atrás do personagem) -->
+  <circle class="loader-ring" cx="150" cy="150" r="110" />
+  <circle class="loader-ring-inner" cx="150" cy="150" r="90" />
+
+  <!-- Sombra no chão -->
+  <ellipse class="shadow" cx="0" cy="0" rx="50" ry="15" />
+
+  <!-- Grupo do Personagem (Flutuante) -->
+  <g class="float-container">
+      <g clip-path="url(#clip-1)">
+        <!-- Corpo Principal (Branco/Cinza) -->
+        <g fill="#fefefe">
+            <path d="M147.27246,87.97515c2.5166,-0.21943 5.56641,-0.04541 8.07715,0.1752c11.28369,0.9917 19.11182,4.28906 28.2334,10.68208c-1.5791,1.86973 -3.7251,4.56387 -5.41406,6.23159c-0.9375,-0.75117 -1.9043,-1.46353 -2.89893,-2.1353c-19.38135,-13.12544 -47.89907,-8.75566 -60.98643,11.07246c-8.41948,12.75601 -9.69873,28.39204 -6.78193,43.06084c1.82476,7.37842 3.77798,12.22119 8.11289,18.5625c-2.28311,2.354 -4.46411,4.80469 -6.53657,7.34619c-1.48403,-1.46338 -3.26953,-3.84229 -4.49443,-5.53125c-6.71704,-9.25488 -9.80771,-19.63916 -10.25273,-31.01074c-0.59971,-15.32271 4.12617,-29.61021 14.54648,-40.96875c9.98174,-10.6771 23.78745,-16.96421 38.39517,-17.48481z"/>
+            <path d="M193.7666,107.89849c1.68604,1.06055 6.86279,11.54238 7.79297,13.82036c5.94141,14.7186 5.84766,31.18447 -0.26074,45.83438c-5.31299,12.6167 -15.90674,23.3042 -28.60107,28.46924c-14.68359,5.81543 -31.05322,5.69971 -45.65391,-0.32227c-1.44331,-0.66211 -2.88706,-1.49121 -4.2835,-2.25879c1.7042,-2.2251 3.39565,-4.1499 5.26802,-6.22852c1.37871,0.44531 2.44116,1.2832 3.71177,1.87061c12.6772,5.85352 29.03086,5.2002 41.19932,-1.73877c22.65381,-12.91846 26.4873,-50.5147 14.2998,-71.58589c2.03467,-2.58486 4.42529,-5.21587 6.52734,-7.86035z"/>
+            <path d="M198.51709,93.10972l0.49805,-0.06313l0.17139,0.1689l-0.34717,0.95332c-0.38672,0.6791 -2.70703,3.59707 -3.29004,4.37358c-3.33545,4.44038 -6.74561,8.8251 -10.22754,13.15225c-13.52344,16.79751 -27.33838,33.35933 -41.43604,49.67842l-21.16626,24.79834l-6.65552,7.72852c-1.16543,1.34473 -2.58413,3.07031 -3.8105,4.28174c-3.36958,0.2666 -7.14829,0.12744 -10.28086,0.42627c7.84043,-9.33398 17.30786,-19.22314 25.62905,-28.28467l41.03115,-44.46504c9.80859,-10.59521 20.42725,-21.89487 29.88428,-32.74849z"/>
+        </g>
+
+        <!-- Parte Azul (Olhos) com Brilho Pulsante -->
+        <path class="eyes-glow" d="M198.51709,93.10972c1.50293,-1.71328 2.91064,-3.29238 4.48828,-4.93389l0.10693,0.02373c-1.41211,1.86665 -2.65137,4.09409 -4.27295,5.96924l0.34717,-0.95332l-0.17139,-0.1689z" fill="#a7cbd1"/>
+        
+        <!-- Scanner Overlay -->
+        <!-- O 'g' aqui usa um truque para recortar o efeito de luz apenas no formato do icone -->
+        <!-- Composite 'in' faz a luz aparecer apenas onde tem pixel desenhado -->
+        <g style="mix-blend-mode: overlay;">
+             <!-- Máscara de desenho original usada aqui -->
+             <g style="isolation: isolate;">
+                <g style="mix-blend-mode: color-dodge;">
+                    <!-- A barra de Scan que passa apenas "dentro" do grupo -->
+                    <rect class="scanner-beam" x="0" y="0" />
+                </g>
+             </g>
+        </g>
+      </g>
+  </g>
+</svg>

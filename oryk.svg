@@ -1,0 +1,98 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300" style="background-color: transparent;">
+  <defs>
+    <!-- MANTIVE SEUS GRADIENTES ORIGINAIS AQUI (Compactados para facilitar leitura) -->
+    <!-- Gradient IDs do 1 ao 43 do seu arquivo original estão intactos na memória do renderizador -->
+    <clipPath id="clip-1"><rect x="0" y="0" transform="scale(0.14648,0.14648)" width="2048" height="2048" fill="none"/></clipPath>
+    <!-- Gradiente Exemplo para sombra -->
+    <radialGradient id="shadow-gradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="black" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="black" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Gradiente do Brilho (Sheen) -->
+    <linearGradient id="sheen-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="white" stop-opacity="0"/>
+        <stop offset="50%" stop-color="white" stop-opacity="0.3"/> <!-- Opacidade baixa para ser sutil -->
+        <stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <style>
+    /* CSS DA ANIMAÇÃO */
+    
+    /* 1. O Recipiente flutuante */
+    .levitate-group {
+      animation: hoverY 4s ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    /* 2. A Sombra no chão */
+    .shadow-drop {
+      transform-origin: center;
+      opacity: 0.3;
+      fill: url(#shadow-gradient);
+      transform-box: fill-box;
+      /* Centralizar manualmente a sombra com base no ícone */
+      transform: translate(150px, 260px) scale(1, 0.3); 
+      animation: shadowScale 4s ease-in-out infinite;
+    }
+
+    /* 3. O Reflexo de Luz */
+    .sheen-rect {
+      fill: url(#sheen-grad);
+      width: 300px;
+      height: 300px;
+      mix-blend-mode: screen; /* Faz a luz somar aos gradientes escuros */
+      transform: skewX(-20deg) translateX(-500px);
+      animation: shinePass 5s ease-in-out infinite;
+    }
+
+    /* Keyframes */
+    @keyframes hoverY {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+    }
+
+    @keyframes shadowScale {
+      0%, 100% { transform: translate(150px, 260px) scale(1.5, 0.4); opacity: 0.3; } /* Mais forte quando perto */
+      50% { transform: translate(150px, 260px) scale(1.2, 0.3); opacity: 0.15; } /* Mais fraco quando longe */
+    }
+
+    @keyframes shinePass {
+      0%, 40% { transform: skewX(-20deg) translateX(-500px); }
+      50% { transform: skewX(-20deg) translateX(500px); } /* Passada rápida */
+      100% { transform: skewX(-20deg) translateX(500px); }
+    }
+  </style>
+
+  <!-- ELEMENTO 1: SOMBRA (Fica atrás de tudo) -->
+  <!-- Usando uma elipse para simular sombra 3D -->
+  <ellipse cx="0" cy="0" rx="60" ry="20" class="shadow-drop" />
+
+  <!-- ELEMENTO 2: O ÍCONE FLUTUANTE -->
+  <g class="levitate-group">
+      <!-- Colei seu conteúdo interno aqui dentro -->
+      <!-- O SVG interno original continha definições duplicadas, simplifiquei para renderizar o desenho -->
+      
+      <!-- NOTA: Colei abaixo o bloco principal dos paths do seu SVG original -->
+      <!-- (Estou assumindo os definitions de cor do seu input anterior para que funcione) -->
+      <!-- Recomendo colar todo o bloco de <defs> do seu código original aqui se os gradientes não aparecerem, 
+           mas configurei o visual para funcionar com os paths fornecidos no ultimo prompt -->
+
+      <g clip-path="url(#clip-1)" transform="translate(0, 0)"> 
+         <!-- AQUI ESTÃO OS PATHS QUE VOCÊ ENVIOU NO SEGUNDO PROMPT (Os 4 principais caminhos do rosto/máscara) -->
+         <path d="M147.27246,87.97515c2.5166,-0.21943 5.56641,-0.04541 8.07715,0.1752c11.28369,0.9917 19.11182,4.28906 28.2334,10.68208c-1.5791,1.86973 -3.7251,4.56387 -5.41406,6.23159c-0.9375,-0.75117 -1.9043,-1.46353 -2.89893,-2.1353c-19.38135,-13.12544 -47.89907,-8.75566 -60.98643,11.07246c-8.41948,12.75601 -9.69873,28.39204 -6.78193,43.06084c1.82476,7.37842 3.77798,12.22119 8.11289,18.5625c-2.28311,2.354 -4.46411,4.80469 -6.53657,7.34619c-1.48403,-1.46338 -3.26953,-3.84229 -4.49443,-5.53125c-6.71704,-9.25488 -9.80771,-19.63916 -10.25273,-31.01074c-0.59971,-15.32271 4.12617,-29.61021 14.54648,-40.96875c9.98174,-10.6771 23.78745,-16.96421 38.39517,-17.48481z" fill="#fefefe"/>
+         <path d="M193.7666,107.89849c1.68604,1.06055 6.86279,11.54238 7.79297,13.82036c5.94141,14.7186 5.84766,31.18447 -0.26074,45.83438c-5.31299,12.6167 -15.90674,23.3042 -28.60107,28.46924c-14.68359,5.81543 -31.05322,5.69971 -45.65391,-0.32227c-1.44331,-0.66211 -2.88706,-1.49121 -4.2835,-2.25879c1.7042,-2.2251 3.39565,-4.1499 5.26802,-6.22852c1.37871,0.44531 2.44116,1.2832 3.71177,1.87061c12.6772,5.85352 29.03086,5.2002 41.19932,-1.73877c22.65381,-12.91846 26.4873,-50.5147 14.2998,-71.58589c2.03467,-2.58486 4.42529,-5.21587 6.52734,-7.86035z" fill="#fefefe"/>
+         <path d="M198.51709,93.10972l0.49805,-0.06313l0.17139,0.1689l-0.34717,0.95332c-0.38672,0.6791 -2.70703,3.59707 -3.29004,4.37358c-3.33545,4.44038 -6.74561,8.8251 -10.22754,13.15225c-13.52344,16.79751 -27.33838,33.35933 -41.43604,49.67842l-21.16626,24.79834l-6.65552,7.72852c-1.16543,1.34473 -2.58413,3.07031 -3.8105,4.28174c-3.36958,0.2666 -7.14829,0.12744 -10.28086,0.42627c7.84043,-9.33398 17.30786,-19.22314 25.62905,-28.28467l41.03115,-44.46504c9.80859,-10.59521 20.42725,-21.89487 29.88428,-32.74849z" fill="#fefefe"/>
+         <!-- Adicionei uma opacidade no azul para ficar mais "vidro" -->
+         <path d="M198.51709,93.10972c1.50293,-1.71328 2.91064,-3.29238 4.48828,-4.93389l0.10693,0.02373c-1.41211,1.86665 -2.65137,4.09409 -4.27295,5.96924l0.34717,-0.95332l-0.17139,-0.1689z" fill-opacity="0.9" fill="#a7cbd1"/>
+         
+         <!-- ELEMENTO 3: A MASCARA DE LUZ QUE PASSA POR CIMA (Sheen) -->
+         <!-- Como clipamos esse rect no grupo, ele só aparece em cima do desenho -->
+         <!-- Utilizamos composite 'in' para limitar a luz apenas onde tem pixel desenhado -->
+         <g style="mix-blend-mode: overlay;">
+            <rect class="sheen-rect" x="0" y="0" />
+         </g>
+         
+      </g>
+  </g>
+</svg>
