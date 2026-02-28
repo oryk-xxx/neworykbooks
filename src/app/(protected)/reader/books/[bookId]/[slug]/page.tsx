@@ -14,15 +14,41 @@ export default async function ReaderPage(props: {
   } = await supabase.auth.getUser();
   if (!user) return null;
 
-  const { data: page } = await supabase
+  // First check if the book exists and is published (RLS handles entitlement check for published books)
+  const { data: book } = await supabase
+    .from("books")
+    .select("id, status")
+    .eq("id", props.params.bookId)
+    .maybeSingle();
+
+  if (!book) {
+    notFound();
+  }
+
+  const { data: page, error: pageError } = await supabase
     .from("pages")
     .select("id, book_id, slug, order_index, content, estimated_read_time_minutes")
     .eq("book_id", props.params.bookId)
-    .eq("slug", props.params.slug)
+    .ilike("slug", props.params.slug)
     .maybeSingle();
 
   if (!page) {
-    notFound();
+    // If we have a book but no page, it might be a 404 or an RLS block (access denied)
+    // RLS on 'pages' requires entitlement. If book is published but page is null, 
+    // it could be that the user is not entitled.
+    return (
+      <div className="max-w-3xl mx-auto py-20 text-center space-y-6">
+        <h1 className="text-header text-white uppercase">Access.Denied</h1>
+        <p className="font-mono text-sm text-text-secondary uppercase opacity-70">
+          Protocol requirement: Active entitlement not detected or sector does not exist.
+        </p>
+        <div className="pt-8">
+          <a href="/reader" className="oryk-button-accent py-3 px-8 text-[10px]">
+            RETURN_TO_TERMINAL
+          </a>
+        </div>
+      </div>
+    );
   }
 
   const { data: progress } = await supabase

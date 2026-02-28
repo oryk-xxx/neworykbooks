@@ -33,6 +33,18 @@ export function PageEditorForm({ bookId, page, action }: Props) {
             ]
         }
     );
+    const [slug, setSlug] = useState(page?.slug || "");
+
+    const handleSlugChange = (value: string) => {
+        const transformed = value
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "") // remove accents
+            .replace(/[^a-z0-9\s-]/g, "") // remove special chars
+            .trim()
+            .replace(/\s+/g, "-"); // spaces to hyphens
+        setSlug(transformed);
+    };
 
     return (
         <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr]">
@@ -48,7 +60,8 @@ export function PageEditorForm({ bookId, page, action }: Props) {
                                 required
                                 placeholder="entry-protocol-01"
                                 className="oryk-input"
-                                defaultValue={page?.slug}
+                                value={slug}
+                                onChange={(e) => handleSlugChange(e.target.value)}
                             />
                         </div>
                         <div className="space-y-3">
