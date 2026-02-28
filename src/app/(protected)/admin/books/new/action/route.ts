@@ -10,6 +10,7 @@ export async function POST(request: Request) {
 
   const form = await request.formData();
   const title = String(form.get("title") || "");
+  const slug = String(form.get("slug") || "");
   const summary = String(form.get("summary") || "");
   const tagsStr = String(form.get("tags") || "");
   const tags = tagsStr
@@ -21,6 +22,7 @@ export async function POST(request: Request) {
     .from("books")
     .insert({
       title,
+      slug,
       summary,
       tags,
       status: "draft"

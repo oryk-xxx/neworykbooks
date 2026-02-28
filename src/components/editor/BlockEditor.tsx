@@ -27,19 +27,19 @@ export function BlockEditor({ initialValue, onChange }: Props) {
     initialValue?.blocks && initialValue.blocks.length > 0
       ? initialValue.blocks
       : [
-          {
-            id: uuid(),
-            type: "heading",
-            data: { level: 1, text: "Título da página" }
-          },
-          {
-            id: uuid(),
-            type: "paragraph",
-            data: {
-              text: "Comece a estruturar o conteúdo desta página em blocos claros e objetivos."
-            }
+        {
+          id: uuid(),
+          type: "heading",
+          data: { level: 1, text: "Título da página" }
+        },
+        {
+          id: uuid(),
+          type: "paragraph",
+          data: {
+            text: "Comece a estruturar o conteúdo desta página em blocos claros e objetivos."
           }
-        ]
+        }
+      ]
   );
 
   function updateBlocks(next: Block[]) {
@@ -112,10 +112,10 @@ export function BlockEditor({ initialValue, onChange }: Props) {
       blocks.map((block) =>
         block.id === id
           ? {
-              ...block,
-              ...(type ? { type } : null),
-              data: { ...(block.data as any), ...(data as any) }
-            }
+            ...block,
+            ...(type ? { type } : null),
+            data: { ...(block.data as any), ...(data as any) }
+          }
           : block
       )
     );
@@ -160,9 +160,6 @@ export function BlockEditor({ initialValue, onChange }: Props) {
           </div>
         </SortableContext>
       </DndContext>
-      <pre className="mt-4 max-h-64 overflow-auto rounded-xl bg-black/60 p-3 text-[10px] text-zinc-400">
-        {JSON.stringify({ blocks }, null, 2)}
-      </pre>
     </div>
   );
 }
@@ -222,7 +219,7 @@ function BlockEditorInner({
     return (
       <div className="space-y-2">
         <select
-          className="h-8 rounded border border-borderSubtle/70 bg-black/60 px-2 text-xs"
+          className="h-8 rounded border border-borderSubtle/70 bg-black/60 px-2 text-xs focus:border-primary/50 outline-none"
           value={block.data.level}
           onChange={(e) =>
             onChange(block.id, { level: Number(e.target.value) as 1 | 2 | 3 })
@@ -232,10 +229,10 @@ function BlockEditorInner({
           <option value={2}>H2</option>
           <option value={3}>H3</option>
         </select>
-        <input
-          className="w-full rounded border border-borderSubtle/70 bg-black/60 px-2 py-1 text-sm"
+        <LocalTextInput
+          className="w-full rounded border border-borderSubtle/70 bg-black/60 px-3 py-2 text-sm font-medium focus:border-primary/50 outline-none transition-colors"
           value={block.data.text}
-          onChange={(e) => onChange(block.id, { text: e.target.value })}
+          onBlur={(val) => onChange(block.id, { text: val })}
         />
       </div>
     );
@@ -243,10 +240,10 @@ function BlockEditorInner({
 
   if (block.type === "paragraph") {
     return (
-      <textarea
-        className="min-h-[80px] w-full rounded border border-borderSubtle/70 bg-black/60 px-2 py-1 text-sm"
+      <LocalTextArea
+        className="min-h-[80px] w-full rounded border border-borderSubtle/70 bg-black/60 px-3 py-2 text-sm focus:border-primary/50 outline-none transition-colors"
         value={block.data.text}
-        onChange={(e) => onChange(block.id, { text: e.target.value })}
+        onBlur={(val) => onChange(block.id, { text: val })}
       />
     );
   }
@@ -254,17 +251,17 @@ function BlockEditorInner({
   if (block.type === "image") {
     return (
       <div className="space-y-2 text-xs">
-        <input
+        <LocalTextInput
           placeholder="URL da imagem"
-          className="w-full rounded border border-borderSubtle/70 bg-black/60 px-2 py-1"
+          className="w-full rounded border border-borderSubtle/70 bg-black/60 px-3 py-2 focus:border-primary/50 outline-none transition-colors"
           value={block.data.url}
-          onChange={(e) => onChange(block.id, { url: e.target.value })}
+          onBlur={(val) => onChange(block.id, { url: val })}
         />
-        <input
+        <LocalTextInput
           placeholder="Legenda (opcional)"
-          className="w-full rounded border border-borderSubtle/70 bg-black/60 px-2 py-1"
+          className="w-full rounded border border-borderSubtle/70 bg-black/60 px-3 py-2 focus:border-primary/50 outline-none transition-colors"
           value={block.data.caption || ""}
-          onChange={(e) => onChange(block.id, { caption: e.target.value })}
+          onBlur={(val) => onChange(block.id, { caption: val })}
         />
       </div>
     );
@@ -273,17 +270,17 @@ function BlockEditorInner({
   if (block.type === "link") {
     return (
       <div className="grid grid-cols-[2fr_3fr] gap-2 text-xs">
-        <input
+        <LocalTextInput
           placeholder="Texto do CTA"
-          className="rounded border border-borderSubtle/70 bg-black/60 px-2 py-1"
+          className="rounded border border-borderSubtle/70 bg-black/60 px-3 py-2 focus:border-primary/50 outline-none transition-colors"
           value={block.data.label}
-          onChange={(e) => onChange(block.id, { label: e.target.value })}
+          onBlur={(val) => onChange(block.id, { label: val })}
         />
-        <input
+        <LocalTextInput
           placeholder="URL"
-          className="rounded border border-borderSubtle/70 bg-black/60 px-2 py-1"
+          className="rounded border border-borderSubtle/70 bg-black/60 px-3 py-2 focus:border-primary/50 outline-none transition-colors"
           value={block.data.href}
-          onChange={(e) => onChange(block.id, { href: e.target.value })}
+          onBlur={(val) => onChange(block.id, { href: val })}
         />
       </div>
     );
@@ -292,17 +289,17 @@ function BlockEditorInner({
   if (block.type === "quote") {
     return (
       <div className="space-y-2 text-xs">
-        <textarea
+        <LocalTextArea
           placeholder="Texto da citação"
-          className="min-h-[80px] w-full rounded border border-borderSubtle/70 bg-black/60 px-2 py-1"
+          className="min-h-[80px] w-full rounded border border-borderSubtle/70 bg-black/60 px-3 py-2 focus:border-primary/50 outline-none transition-colors"
           value={block.data.text}
-          onChange={(e) => onChange(block.id, { text: e.target.value })}
+          onBlur={(val) => onChange(block.id, { text: val })}
         />
-        <input
+        <LocalTextInput
           placeholder="Autor (opcional)"
-          className="w-full rounded border border-borderSubtle/70 bg-black/60 px-2 py-1"
+          className="w-full rounded border border-borderSubtle/70 bg-black/60 px-3 py-2 focus:border-primary/50 outline-none transition-colors"
           value={block.data.attribution || ""}
-          onChange={(e) => onChange(block.id, { attribution: e.target.value })}
+          onBlur={(val) => onChange(block.id, { attribution: val })}
         />
       </div>
     );
@@ -320,7 +317,7 @@ function BlockEditorInner({
     return (
       <div className="space-y-2 text-xs">
         <select
-          className="h-8 rounded border border-borderSubtle/70 bg-black/60 px-2"
+          className="h-8 rounded border border-borderSubtle/70 bg-black/60 px-2 focus:border-primary/50 outline-none"
           value={block.data.style}
           onChange={(e) =>
             onChange(block.id, { style: e.target.value as "bullet" | "numbered" })
@@ -331,25 +328,25 @@ function BlockEditorInner({
         </select>
         <div className="space-y-1">
           {block.data.items.map((item, idx) => (
-            <input
+            <LocalTextInput
               key={idx}
-              className="w-full rounded border border-borderSubtle/70 bg-black/60 px-2 py-1"
+              className="w-full rounded border border-borderSubtle/70 bg-black/60 px-3 py-2 focus:border-primary/50 outline-none transition-colors"
               value={item}
-              onChange={(e) => {
+              onBlur={(val) => {
                 const items = [...block.data.items];
-                items[idx] = e.target.value;
+                items[idx] = val;
                 onChange(block.id, { items });
               }}
             />
           ))}
           <button
             type="button"
-            className="text-[11px] text-accent"
+            className="text-[10px] text-primary font-mono mt-1 hover:underline"
             onClick={() =>
               onChange(block.id, { items: [...block.data.items, "Novo item"] })
             }
           >
-            + Adicionar item
+            + ADD_ITEM
           </button>
         </div>
       </div>
@@ -360,7 +357,7 @@ function BlockEditorInner({
     return (
       <div className="space-y-2 text-xs">
         <select
-          className="h-8 rounded border border-borderSubtle/70 bg-black/60 px-2"
+          className="h-8 rounded border border-borderSubtle/70 bg-black/60 px-2 focus:border-primary/50 outline-none"
           value={block.data.tone}
           onChange={(e) =>
             onChange(block.id, {
@@ -372,10 +369,10 @@ function BlockEditorInner({
           <option value="info">Info</option>
           <option value="alert">Alerta</option>
         </select>
-        <textarea
-          className="min-h-[60px] w-full rounded border border-borderSubtle/70 bg-black/60 px-2 py-1"
+        <LocalTextArea
+          className="min-h-[60px] w-full rounded border border-borderSubtle/70 bg-black/60 px-3 py-2 focus:border-primary/50 outline-none transition-colors"
           value={block.data.text}
-          onChange={(e) => onChange(block.id, { text: e.target.value })}
+          onBlur={(val) => onChange(block.id, { text: val })}
         />
       </div>
     );
@@ -384,17 +381,17 @@ function BlockEditorInner({
   if (block.type === "embed") {
     return (
       <div className="grid grid-cols-[2fr_3fr] gap-2 text-xs">
-        <input
+        <LocalTextInput
           placeholder="Título (opcional)"
-          className="rounded border border-borderSubtle/70 bg-black/60 px-2 py-1"
+          className="rounded border border-borderSubtle/70 bg-black/60 px-3 py-2 focus:border-primary/50 outline-none transition-colors"
           value={block.data.title || ""}
-          onChange={(e) => onChange(block.id, { title: e.target.value })}
+          onBlur={(val) => onChange(block.id, { title: val })}
         />
-        <input
+        <LocalTextInput
           placeholder="URL do embed"
-          className="rounded border border-borderSubtle/70 bg-black/60 px-2 py-1"
+          className="rounded border border-borderSubtle/70 bg-black/60 px-3 py-2 focus:border-primary/50 outline-none transition-colors"
           value={block.data.url}
-          onChange={(e) => onChange(block.id, { url: e.target.value })}
+          onBlur={(val) => onChange(block.id, { url: val })}
         />
       </div>
     );
@@ -546,6 +543,52 @@ function WrongRightEditor({
   );
 }
 
+function LocalTextInput({
+  value,
+  onBlur,
+  className,
+  placeholder
+}: {
+  value: string;
+  onBlur: (val: string) => void;
+  className?: string;
+  placeholder?: string;
+}) {
+  const [local, setLocal] = useState(value);
+  return (
+    <input
+      value={local}
+      placeholder={placeholder}
+      className={className}
+      onChange={(e) => setLocal(e.target.value)}
+      onBlur={() => onBlur(local)}
+    />
+  );
+}
+
+function LocalTextArea({
+  value,
+  onBlur,
+  className,
+  placeholder
+}: {
+  value: string;
+  onBlur: (val: string) => void;
+  className?: string;
+  placeholder?: string;
+}) {
+  const [local, setLocal] = useState(value);
+  return (
+    <textarea
+      value={local}
+      placeholder={placeholder}
+      className={className}
+      onChange={(e) => setLocal(e.target.value)}
+      onBlur={() => onBlur(local)}
+    />
+  );
+}
+
 function BlockToolbarButton(props: {
   label: string;
   onClick: () => void;
@@ -555,11 +598,10 @@ function BlockToolbarButton(props: {
     <button
       type="button"
       onClick={props.onClick}
-      className={`rounded-full border px-3 py-1 ${
-        props.accent
-          ? "border-accent/80 bg-accent/10 text-[11px] text-accent"
-          : "border-borderSubtle/70 bg-black/40 text-[11px] text-zinc-200"
-      }`}
+      className={`rounded-full border px-4 py-1.5 transition-all text-[10px] font-mono tracking-tight ${props.accent
+        ? "border-primary/40 bg-primary/5 text-primary hover:bg-primary/10 shadow-[0_0_15px_rgba(43,255,136,0.05)]"
+        : "border-white/10 bg-white/[0.02] text-zinc-400 hover:border-white/20 hover:text-white"
+        }`}
     >
       {props.label}
     </button>

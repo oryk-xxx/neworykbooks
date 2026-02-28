@@ -23,7 +23,7 @@ export default async function ReaderHomePage() {
   const { data: books } = hasAccess
     ? await supabase
       .from("books")
-      .select("id, title, cover_url, summary, tags, average_rating, status")
+      .select("id, slug, title, cover_url, summary, tags, average_rating, status")
       .order("created_at", { ascending: true })
     : { data: [] as any[] };
 
@@ -65,7 +65,7 @@ export default async function ReaderHomePage() {
             {books?.map((book: any) => (
               <Link
                 key={book.id}
-                href={`/reader/books/${book.id}`}
+                href={`/reader/${book.slug}`}
                 className="oryk-surface oryk-surface-hover group relative overflow-hidden"
               >
                 <div className="p-8 space-y-6">
