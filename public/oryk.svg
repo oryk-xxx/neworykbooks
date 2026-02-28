@@ -1,8 +1,0 @@
-<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="10" y="10" width="20" height="20" border-radius="2" stroke="hsl(153, 100%, 58%)" stroke-width="1.5">
-    <animate attributeName="stroke-opacity" values="0.3;1;0.3" dur="4s" repeatCount="indefinite" />
-  </rect>
-  <path d="M20 15V25M15 20H25" stroke="hsl(153, 100%, 58%)" stroke-width="1.5" stroke-linecap="round">
-    <animate attributeName="opacity" values="1;0.2;1" dur="2s" repeatCount="indefinite" />
-  </path>
-</svg>
