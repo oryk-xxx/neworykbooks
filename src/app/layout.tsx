@@ -34,7 +34,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
                     ØRYK
                   </span>
                   <span className="font-mono text-[9px] tracking-[0.4em] uppercase text-text-meta">
-                    Infrastructure
+                    Infraestrutura
                   </span>
                 </div>
               </div>
@@ -42,14 +42,14 @@ export default function RootLayout(props: { children: React.ReactNode }) {
               <div className="flex items-center gap-8">
                 <div className="hidden md:flex items-center gap-2 font-mono text-[10px] tracking-[0.2em] uppercase text-text-secondary">
                   <span className="status-dot" />
-                  <span>Protocol.Active</span>
+                  <span>Protocolo.Ativo</span>
                 </div>
 
                 <div className="flex items-center gap-6">
                   <span className="h-4 w-px bg-white/10" />
                   <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.2em]">
                     <span className="text-white">V.2.0.4</span>
-                    <span className="text-text-meta">Secure</span>
+                    <span className="text-text-meta">Seguro</span>
                   </div>
                 </div>
               </div>

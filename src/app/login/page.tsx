@@ -17,7 +17,7 @@ function LoginForm() {
 
   useEffect(() => {
     if (searchParams.get('ok') === 'created') {
-      setSuccessMsg('Account created successfully. Please log in.');
+      setSuccessMsg('Conta criada com sucesso. Por favor, autentique-se.');
     }
   }, [searchParams]);
 
@@ -42,7 +42,7 @@ function LoginForm() {
       } catch (e) { }
 
       if (!res.ok) {
-        throw new Error(data?.error || 'Invalid credentials');
+        throw new Error(data?.error || 'Credenciais inválidas');
       }
 
       if (data.redirectTo) {
@@ -67,8 +67,8 @@ function LoginForm() {
   return (
     <div className="w-full max-w-md oryk-surface p-10 relative overflow-hidden">
       <div className="mb-10 text-center">
-        <h1 className="text-header mb-2 text-primary">System.Authentication</h1>
-        <p className="font-mono text-[9px] tracking-oryk text-text-meta uppercase">Module: Security.Protocol.A8</p>
+        <h1 className="text-header mb-2 text-primary">Autenticação.Sistema</h1>
+        <p className="font-mono text-[9px] tracking-oryk text-text-meta uppercase">Módulo: Protocolo.Segurança.A8</p>
       </div>
 
       {successMsg && (
@@ -86,7 +86,7 @@ function LoginForm() {
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="space-y-2">
           <label className="text-label" htmlFor="identifier">
-            Credential.ID
+            ID.Credencial
           </label>
           <input
             id="identifier"
@@ -103,10 +103,10 @@ function LoginForm() {
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <label className="text-label" htmlFor="password">
-              Access.Key
+              Chave.Acesso
             </label>
             <Link href="/forgot" className="text-[9px] uppercase tracking-oryk text-primary/40 hover:text-primary transition-colors">
-              Recover?
+              Recuperar?
             </Link>
           </div>
           <input
@@ -126,16 +126,16 @@ function LoginForm() {
             disabled={loading}
             className="oryk-button-accent w-full py-4 text-[10px] uppercase tracking-[0.2em]"
           >
-            {loading ? 'PROCESSING...' : 'INITIALIZE SESSION →'}
+            {loading ? 'PROCESSANDO...' : 'INICIALIZAR SESSÃO →'}
           </button>
         </div>
       </form>
 
       <div className="mt-10 pt-8 border-t border-white/[0.06] text-center">
         <p className="text-[9px] tracking-oryk text-text-meta uppercase">
-          Unauthorized?{' '}
+          Não autorizado?{' '}
           <Link href="/register" className="text-white hover:text-primary transition-colors">
-            Register.Identity
+            Registrar.Identidade
           </Link>
         </p>
       </div>
@@ -146,7 +146,7 @@ function LoginForm() {
 export default function LoginPage() {
   return (
     <div className="min-h-[calc(100vh-5rem)] flex items-center justify-center p-8">
-      <Suspense fallback={<div className="font-mono text-[10px] uppercase tracking-[0.4em] text-primary animate-pulse">Establishing Connection...</div>}>
+      <Suspense fallback={<div className="font-mono text-[10px] uppercase tracking-[0.4em] text-primary animate-pulse">Estabelecendo Conexão...</div>}>
         <LoginForm />
       </Suspense>
     </div>

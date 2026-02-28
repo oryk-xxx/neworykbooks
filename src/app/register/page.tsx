@@ -57,8 +57,8 @@ export default function RegisterPage() {
         <div className="min-h-[calc(100vh-5rem)] flex items-center justify-center p-8">
             <div className="w-full max-w-2xl oryk-surface p-10 relative overflow-hidden">
                 <div className="mb-10 text-center">
-                    <h1 className="text-header mb-2 text-primary">Identity.Creation</h1>
-                    <p className="font-mono text-[9px] tracking-oryk text-text-meta uppercase">Module: Security.Protocol.R1</p>
+                    <h1 className="text-header mb-2 text-primary">Criação.Identidade</h1>
+                    <p className="font-mono text-[9px] tracking-oryk text-text-meta uppercase">Módulo: Protocolo.Segurança.R1</p>
                 </div>
 
                 {error && (
@@ -71,7 +71,7 @@ export default function RegisterPage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
                             <label className="text-label" htmlFor="username">
-                                Username.Token
+                                Token.Usuário
                             </label>
                             <input
                                 id="username"
@@ -106,7 +106,7 @@ export default function RegisterPage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
                             <label className="text-label" htmlFor="password">
-                                Security.Hash
+                                Hash.Segurança
                             </label>
                             <input
                                 id="password"
@@ -122,7 +122,7 @@ export default function RegisterPage() {
                         </div>
                         <div className="space-y-2">
                             <label className="text-label" htmlFor="confirmPassword">
-                                Confirm.Hash
+                                Confirmar.Hash
                             </label>
                             <input
                                 id="confirmPassword"
@@ -144,7 +144,7 @@ export default function RegisterPage() {
                             disabled={loading}
                             className="oryk-button-accent w-full py-4 text-[10px] uppercase tracking-[0.2em]"
                         >
-                            {loading ? 'PROCESSING REGISTRATION...' : 'FINALIZE IDENTITY →'}
+                            {loading ? 'PROCESSANDO REGISTRO...' : 'FINALIZAR IDENTIDADE →'}
                         </button>
                     </div>
                 </form>

@@ -20,8 +20,8 @@
   "/register/page": "app/register/page.js",
   "/reset/page": "app/reset/page.js",
   "/checkout/page": "app/checkout/page.js",
-  "/(protected)/admin/books/[bookId]/pages/[pageId]/page": "app/(protected)/admin/books/[bookId]/pages/[pageId]/page.js",
   "/(protected)/admin/books/[bookId]/page": "app/(protected)/admin/books/[bookId]/page.js",
+  "/(protected)/admin/books/[bookId]/pages/[pageId]/page": "app/(protected)/admin/books/[bookId]/pages/[pageId]/page.js",
   "/(protected)/admin/books/[bookId]/pages/[pageId]/save/route": "app/(protected)/admin/books/[bookId]/pages/[pageId]/save/route.js",
   "/(protected)/admin/books/[bookId]/pages/new/action/route": "app/(protected)/admin/books/[bookId]/pages/new/action/route.js",
   "/(protected)/admin/books/[bookId]/pages/new/page": "app/(protected)/admin/books/[bookId]/pages/new/page.js",
@@ -29,7 +29,7 @@
   "/(protected)/admin/books/new/action/route": "app/(protected)/admin/books/new/action/route.js",
   "/(protected)/admin/books/new/page": "app/(protected)/admin/books/new/page.js",
   "/(protected)/admin/books/page": "app/(protected)/admin/books/page.js",
-  "/(protected)/reader/books/[bookId]/[slug]/page": "app/(protected)/reader/books/[bookId]/[slug]/page.js",
-  "/(protected)/reader/books/[bookId]/page": "app/(protected)/reader/books/[bookId]/page.js",
+  "/(protected)/reader/[bookSlug]/[pageSlug]/page": "app/(protected)/reader/[bookSlug]/[pageSlug]/page.js",
+  "/(protected)/reader/[bookSlug]/page": "app/(protected)/reader/[bookSlug]/page.js",
   "/(protected)/reader/page": "app/(protected)/reader/page.js"
 }

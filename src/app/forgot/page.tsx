@@ -46,12 +46,12 @@ export default function ForgotPasswordPage() {
         <div className="min-h-[calc(100vh-5rem)] flex items-center justify-center p-8 text-center">
             <div className="w-full max-w-md oryk-surface p-10 relative overflow-hidden">
                 <div className="mb-10 text-center">
-                    <h1 className="text-header mb-2 text-primary">Protocol.Recovery</h1>
-                    <p className="font-mono text-[9px] tracking-oryk text-text-meta uppercase">Module: Security.Protocol.F2</p>
+                    <h1 className="text-header mb-2 text-primary">Recuperação.Protocolo</h1>
+                    <p className="font-mono text-[9px] tracking-oryk text-text-meta uppercase">Módulo: Segurança.Protocolo.F2</p>
                 </div>
 
                 <p className="font-mono text-[10px] tracking-oryk text-text-secondary uppercase mb-8 leading-relaxed opacity-70">
-                    Transmission of authentication link to registered uplink.
+                    Transmissão de link de autenticação para o canal registrado.
                 </p>
 
                 {error && (
@@ -89,16 +89,16 @@ export default function ForgotPasswordPage() {
                             disabled={loading}
                             className="oryk-button-accent w-full py-4 text-[10px] uppercase tracking-[0.2em]"
                         >
-                            {loading ? 'PROCESSING...' : 'REQUEST UPLINK →'}
+                            {loading ? 'PROCESSANDO...' : 'SOLICITAR UPLINK →'}
                         </button>
                     </div>
                 </form>
 
                 <div className="mt-10 pt-8 border-t border-white/[0.06]">
                     <p className="text-[9px] tracking-oryk text-text-meta uppercase">
-                        Credential found?{' '}
+                        Credencial encontrada?{' '}
                         <Link href="/login" className="text-white hover:text-primary transition-colors">
-                            Return.Frontier
+                            Retornar.Fronteira
                         </Link>
                     </p>
                 </div>

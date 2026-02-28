@@ -26,7 +26,7 @@ export default async function AdminBookPage(props: { params: { bookId: string } 
             href="/admin/books"
             className="font-mono text-[9px] uppercase tracking-oryk-wide text-primary hover:opacity-70 transition-opacity flex items-center gap-2 mb-6"
           >
-            ← RETURN_TO_REPOSITORY
+            ← RETORNAR_AO_REPOSITÓRIO
           </Link>
           <p className="text-header text-white uppercase">{book.title}</p>
         </div>
@@ -39,7 +39,7 @@ export default async function AdminBookPage(props: { params: { bookId: string } 
               : "oryk-button-primary"
               } py-4 px-10 text-[10px] uppercase font-bold transition-all duration-300 rounded-xl`}
           >
-            {book.status === "published" ? "DEACTIVATE_FEED" : "ACTIVATE_FEED"}
+            {book.status === "published" ? "DESATIVAR_FEED" : "ATIVAR_FEED"}
           </button>
         </form>
       </div>
@@ -47,14 +47,14 @@ export default async function AdminBookPage(props: { params: { bookId: string } 
       <div className="space-y-8">
         <div className="flex items-center justify-between border-b border-white/[0.04] pb-6">
           <div className="space-y-2">
-            <h3 className="font-mono text-[9px] uppercase tracking-oryk-wide text-text-secondary opacity-50">TRANSMISSION_INDEX</h3>
-            <p className="text-sm font-light text-white/40 italic">Sequential data stream units</p>
+            <h3 className="font-mono text-[9px] uppercase tracking-oryk-wide text-text-secondary opacity-50">ÍNDICE_DE_TRANSMISSÕES</h3>
+            <p className="text-sm font-light text-white/40 italic">Unidades sequenciais de fluxo de dados</p>
           </div>
           <Link
             href={`/admin/books/${book.id}/pages/new`}
             className="font-mono text-[9px] uppercase tracking-oryk-wide text-primary hover:text-white transition-all flex items-center gap-2"
           >
-            INIT_NEW_TRANSMISSION +
+            INIT_NOVA_TRANSMISSÃO +
           </Link>
         </div>
 
@@ -75,7 +75,7 @@ export default async function AdminBookPage(props: { params: { bookId: string } 
               </div>
               <div className="flex items-center gap-6">
                 <span className="font-mono text-[9px] uppercase tracking-oryk text-text-secondary opacity-0 group-hover:opacity-40 transition-all transform translate-x-2 group-hover:translate-x-0 hidden sm:block">
-                  UNIT_CONFIG // ACCESS
+                  CONF_UNID // ACESSO
                 </span>
                 <span className="font-mono text-[9px] text-primary font-bold group-hover:tracking-widest transition-all">
                   MOD_01 →
@@ -89,7 +89,7 @@ export default async function AdminBookPage(props: { params: { bookId: string } 
           {pages && pages.length === 0 && (
             <div className="py-20 text-center oryk-surface border-dashed opacity-40">
               <p className="font-mono text-[10px] text-text-secondary uppercase tracking-oryk-wide">
-                TRANSMISSION_GAP: NO DATA UNITS DETECTED
+                LACUNA_TRANSMISSÃO: NENHUM DADO DETECTADO
               </p>
             </div>
           )}

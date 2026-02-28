@@ -29,7 +29,7 @@ export default function MFAPage() {
             } catch (e) { }
 
             if (!res.ok) {
-                throw new Error(data?.error || 'PIN Validation Failed');
+                throw new Error(data?.error || 'Validação do PIN falhou');
             }
 
             router.push('/reader');
@@ -44,12 +44,12 @@ export default function MFAPage() {
         <div className="min-h-[calc(100vh-5rem)] flex items-center justify-center p-8">
             <div className="w-full max-w-sm oryk-surface p-10 text-center relative overflow-hidden">
                 <div className="mb-10">
-                    <h1 className="text-header mb-2 text-primary">Identity.Verify</h1>
-                    <p className="font-mono text-[9px] tracking-oryk text-text-meta uppercase">Module: Security.MFA.V3</p>
+                    <h1 className="text-header mb-2 text-primary">Verificar.Identidade</h1>
+                    <p className="font-mono text-[9px] tracking-oryk text-text-meta uppercase">Módulo: Segurança.MFA.V3</p>
                 </div>
 
                 <p className="font-mono text-[10px] tracking-oryk text-text-secondary uppercase mb-8 leading-relaxed opacity-70">
-                    Enter the 8-digit temporal sequence transmitted to your uplink.
+                    Digite a sequência temporal de 8 dígitos transmitida para seu canal.
                 </p>
 
                 {error && (
@@ -79,13 +79,13 @@ export default function MFAPage() {
                         disabled={loading || pin.length !== 8}
                         className="oryk-button-accent w-full py-4 text-[10px] uppercase tracking-[0.2em]"
                     >
-                        {loading ? 'VALIDATING SEQUENCE...' : 'CONFIRM ACCESS →'}
+                        {loading ? 'VALIDANDO SEQUÊNCIA...' : 'CONFIRMAR ACESSO →'}
                     </button>
                 </form>
 
                 <div className="mt-10 pt-8 border-t border-white/[0.06]">
                     <p className="text-[9px] tracking-oryk text-text-meta uppercase opacity-50">
-                        Sequence timeout? Check uplink spam filters or wait for re-transmission.
+                        Tempo esgotado? Verifique os filtros de spam do seu canal ou aguarde o reenvio.
                     </p>
                 </div>
             </div>

@@ -58,13 +58,13 @@ export default function ResetPasswordPage() {
         <div className="min-h-[calc(100vh-5rem)] flex items-center justify-center p-8">
             <div className="w-full max-w-md oryk-surface p-10 relative overflow-hidden">
                 <div className="mb-10 text-center">
-                    <h1 className="text-header mb-2 text-primary">Security.Reset</h1>
-                    <p className="font-mono text-[9px] tracking-oryk text-text-meta uppercase">Module: Security.Protocol.RS</p>
+                    <h1 className="text-header mb-2 text-primary">Redefinir.Segurança</h1>
+                    <p className="font-mono text-[9px] tracking-oryk text-text-meta uppercase">Módulo: Protocolo.Segurança.RS</p>
                 </div>
 
                 {success && (
                     <div className="bg-primary/10 border border-primary/20 text-primary text-[10px] uppercase tracking-oryk p-4 rounded mb-8 text-center ring-1 ring-primary/20">
-                        {success} Redirecting...
+                        {success} Redirecionando...
                     </div>
                 )}
 
@@ -77,7 +77,7 @@ export default function ResetPasswordPage() {
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="space-y-2">
                         <label className="text-label" htmlFor="password">
-                            New.Security.Hash
+                            Novo.Hash.Segurança
                         </label>
                         <input
                             id="password"
@@ -94,7 +94,7 @@ export default function ResetPasswordPage() {
 
                     <div className="space-y-2">
                         <label className="text-label" htmlFor="confirmPassword">
-                            Confirm.Hash
+                            Confirmar.Hash
                         </label>
                         <input
                             id="confirmPassword"
@@ -115,16 +115,16 @@ export default function ResetPasswordPage() {
                             disabled={loading}
                             className="oryk-button-accent w-full py-4 text-[10px] uppercase tracking-[0.2em]"
                         >
-                            {loading ? 'PROCESSING...' : 'UPDATE HASH →'}
+                            {loading ? 'PROCESSANDO...' : 'ATUALIZAR HASH →'}
                         </button>
                     </div>
                 </form>
 
                 <div className="mt-10 pt-8 border-t border-white/[0.06] text-center">
                     <p className="text-[9px] tracking-oryk text-text-meta uppercase">
-                        Abort Protocol?{' '}
+                        Abortar Protocolo?{' '}
                         <Link href="/login" className="text-white hover:text-primary transition-colors">
-                            Return.Login
+                            Retornar.Login
                         </Link>
                     </p>
                 </div>

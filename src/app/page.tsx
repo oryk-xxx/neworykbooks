@@ -68,10 +68,10 @@ export default function LandingPage() {
           <div className="oryk-surface p-1 shadow-2xl relative">
             <div className="bg-black/40 p-10 rounded-lg space-y-8 overflow-hidden">
               <div className="flex items-center justify-between font-mono text-[9px] tracking-[0.2em] text-text-tertiary border-b border-white/[0.06] pb-4">
-                <span>INTERFACE.PREVIEW</span>
+                <span>PRÉVIA.DA.INTERFACE</span>
                 <div className="flex items-center gap-2">
                   <div className="h-1 w-1 rounded-full bg-primary" />
-                  <span>IMMERSIVE.MODE</span>
+                  <span>MODO.IMERSIVO</span>
                 </div>
               </div>
 

@@ -26,10 +26,10 @@ export default async function NewBookPage() {
           href="/admin/books"
           className="font-mono text-[9px] uppercase tracking-oryk-wide text-text-secondary opacity-50 hover:opacity-100 transition-opacity flex items-center gap-2 mb-6"
         >
-          ← ABORT_PROTOCOL
+          ← ABORTAR_PROTOCOLO
         </Link>
-        <h2 className="font-mono text-[9px] uppercase tracking-oryk-wide text-text-secondary opacity-50">NEW_ENTITY_REGISTRATION</h2>
-        <p className="text-header text-white uppercase">Initialize.Main_Volume</p>
+        <h2 className="font-mono text-[9px] uppercase tracking-oryk-wide text-text-secondary opacity-50">NOVO_REGISTRO_ENTIDADE</h2>
+        <p className="text-header text-white uppercase">Inicializar.Volume_Principal</p>
       </div>
 
       <div className="oryk-surface p-10">
@@ -37,12 +37,12 @@ export default async function NewBookPage() {
           <div className="grid gap-8">
             <div className="space-y-3">
               <label className="font-mono text-[9px] uppercase tracking-oryk-wide text-text-secondary opacity-50 ml-1">
-                VOLUME_TITLE
+                TÍTULO_DO_VOLUME
               </label>
               <input
                 name="title"
                 required
-                placeholder="Ex: SILENCE_PROTOCOL"
+                placeholder="Ex: PROTOCOLO_SILEÊCIO"
                 className="oryk-input"
                 onChange={(e) => handleTitleChange(e.target.value)}
               />
@@ -50,7 +50,7 @@ export default async function NewBookPage() {
 
             <div className="space-y-3">
               <label className="font-mono text-[9px] uppercase tracking-oryk-wide text-text-secondary opacity-50 ml-1">
-                TRANSMISSION_SLUG
+                SLUG_DE_TRANSMISSÃO
               </label>
               <input
                 name="slug"
@@ -65,22 +65,22 @@ export default async function NewBookPage() {
 
           <div className="space-y-3">
             <label className="font-mono text-[9px] uppercase tracking-oryk-wide text-text-secondary opacity-50 ml-1">
-              ABSTRACT_OVERVIEW
+              RESUMO_ABSTRATO
             </label>
             <textarea
               name="summary"
-              placeholder="High-level summary of entity parameters..."
+              placeholder="Resumo de alto nível dos parâmetros da entidade..."
               className="oryk-input min-h-[140px] resize-none"
             />
           </div>
 
           <div className="space-y-3">
             <label className="font-mono text-[9px] uppercase tracking-oryk-wide text-text-secondary opacity-50 ml-1">
-              CLASSIFICATION_TAGS
+              TAGS_DE_CLASSIFICAÇÃO
             </label>
             <input
               name="tags"
-              placeholder="Minimalist, Restricted, Control"
+              placeholder="Minimalista, Restrito, Controle"
               className="oryk-input"
             />
           </div>
@@ -90,7 +90,7 @@ export default async function NewBookPage() {
               type="submit"
               className="oryk-button-accent w-full py-5 text-[11px] uppercase font-bold tracking-oryk-wide"
             >
-              COMMIT_ENTRY →
+              CONFIRMAR_REGISTRO →
             </button>
           </div>
         </form>

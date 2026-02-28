@@ -36,13 +36,13 @@ export default async function ReaderPage(props: {
     if (!page) {
         return (
             <div className="max-w-3xl mx-auto py-20 text-center space-y-6">
-                <h1 className="text-header text-white uppercase">Access.Denied</h1>
+                <h1 className="text-header text-white uppercase">Acesso.Negado</h1>
                 <p className="font-mono text-sm text-text-secondary uppercase opacity-70">
-                    Protocol requirement: Active entitlement not detected or sector does not exist.
+                    Requisito do protocolo: Habilitação ativa não detectada ou setor inexistente.
                 </p>
                 <div className="pt-8">
                     <a href="/reader" className="oryk-button-accent py-3 px-8 text-[10px]">
-                        RETURN_TO_TERMINAL
+                        RETORNAR_AO_TERMINAL
                     </a>
                 </div>
             </div>
@@ -70,9 +70,9 @@ export default async function ReaderPage(props: {
             <article className="prose prose-invert prose-oryk max-w-none">
                 <header className="mb-16 border-b border-white/[0.06] pb-12">
                     <div className="flex items-center gap-4 mb-6">
-                        <span className="font-mono text-[9px] uppercase tracking-[0.4em] text-primary">Sector.{String(page.order_index).padStart(2, '0')}</span>
+                        <span className="font-mono text-[9px] uppercase tracking-[0.4em] text-primary">Setor.{String(page.order_index).padStart(2, '0')}</span>
                         <span className="h-px w-12 bg-white/[0.06]" />
-                        <span className="font-mono text-[9px] uppercase tracking-oryk text-text-meta opacity-50">{page.estimated_read_time_minutes || 5} PROCESS_TIME.MIN</span>
+                        <span className="font-mono text-[9px] uppercase tracking-oryk text-text-meta opacity-50">{page.estimated_read_time_minutes || 5} TEMPO_PROCESSAMENTO.MIN</span>
                     </div>
                     <h1 className="text-header text-white tracking-tight leading-tight">
                         {page.slug.split('-').map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
@@ -108,10 +108,10 @@ function SummaryForm(props: {
     return (
         <div className="oryk-surface p-12 space-y-10 relative overflow-hidden bg-primary/2">
             <div className="space-y-3">
-                <h3 className="text-header-sm text-white">Sync.Knowledge_Core</h3>
+                <h3 className="text-header-sm text-white">Sincronizar.Núcleo_Conhecimento</h3>
                 <p className="font-mono text-[10px] text-text-secondary tracking-oryk leading-relaxed uppercase opacity-60">
-                    Terminal requires conceptual synthesis for sector progression. <br />
-                    System requirement: Minimum 80 units of synthesis.
+                    O terminal requer síntese conceitual para progressão de setor. <br />
+                    Requisito do sistema: Mínimo de 80 unidades de síntese.
                 </p>
             </div>
 
@@ -126,10 +126,10 @@ function SummaryForm(props: {
                         disabled={disabled}
                         minLength={80}
                         className="oryk-input min-h-[200px] py-6 text-sm leading-relaxed resize-none transition-all duration-300 focus:ring-1 focus:ring-primary/20"
-                        placeholder="[ INPUT SYNTHESIS DATA HERE ]"
+                        placeholder="[ INSIRA OS DADOS DE SÍNTESE AQUI ]"
                     />
                     <div className="absolute bottom-4 right-4 font-mono text-[9px] uppercase tracking-oryk text-text-meta pointer-events-none group-focus-within:text-primary transition-colors opacity-40">
-                        SYNT_MODE_ACTIVE // UPLINK_STANDBY
+                        MODO_SÍNT_ATIVO // UPLINK_ESPERA
                     </div>
                 </div>
 
@@ -140,7 +140,7 @@ function SummaryForm(props: {
                         className={`oryk-button-accent py-4 px-12 text-[10px] w-full sm:w-auto ${disabled ? "opacity-20 cursor-not-allowed grayscale" : ""
                             }`}
                     >
-                        VALIDATE COGNITION →
+                        VALIDAR COGNIÇÃO →
                     </button>
 
                     {disabled && (

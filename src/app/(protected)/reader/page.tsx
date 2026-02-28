@@ -31,7 +31,7 @@ export default async function ReaderHomePage() {
     <div className="space-y-12 max-w-7xl mx-auto">
       <header className="space-y-4">
         <h1 className="text-header text-primary">Archive.Intel</h1>
-        <p className="font-mono text-[9px] tracking-oryk text-text-meta uppercase">Status: Connection established // Authorization: Granted</p>
+        <p className="font-mono text-[9px] tracking-oryk text-text-meta uppercase">Status: Conexão estabelecida // Autorização: Concedida</p>
       </header>
 
       {!hasAccess ? (
@@ -41,13 +41,13 @@ export default async function ReaderHomePage() {
             <p className="text-label text-primary">Archive.Restricted</p>
           </div>
           <p className="mb-6 font-mono text-[11px] text-text-secondary leading-relaxed uppercase opacity-70">
-            System requires synchronization fee. Terminal access locked until protocol completion.
+            O sistema requer taxa de sincronização. Acesso ao terminal bloqueado até a conclusão do protocolo.
           </p>
           <Link
             href="/checkout"
             className="oryk-button-accent py-3 px-8 text-[10px]"
           >
-            INITIALIZE CHECKOUT →
+            INICIALIZAR CHECKOUT →
           </Link>
         </div>
       ) : null}
@@ -55,9 +55,9 @@ export default async function ReaderHomePage() {
       {hasAccess ? (
         <section className="space-y-8">
           <div className="flex items-center justify-between border-b border-white/[0.06] pb-4">
-            <h2 className="text-label">Available.Transmissions</h2>
+            <h2 className="text-label">Transmissões.Disponíveis</h2>
             <span className="font-mono text-[9px] text-text-meta tracking-oryk uppercase">
-              {books?.length || 0} SECTOR(S) LOADED
+              {books?.length || 0} SETOR(ES) CARREGADO(S)
             </span>
           </div>
 
@@ -70,11 +70,11 @@ export default async function ReaderHomePage() {
               >
                 <div className="p-8 space-y-6">
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-text-meta">
-                      Digital_Nexus_Output
+                    <span className="font-mono text-[9px] tax-[0.3em] text-text-meta">
+                      Saída.Nexus.Digital
                     </span>
                     <span className="font-mono text-[9px] text-primary tracking-oryk opacity-0 group-hover:opacity-100 transition-opacity">
-                      DECRYPT →
+                      DECRIPTAR →
                     </span>
                   </div>
 

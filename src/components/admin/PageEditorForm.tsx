@@ -65,7 +65,7 @@ export function PageEditorForm({ bookId, page, action }: Props) {
                         className={`px-6 py-2 text-[10px] font-mono tracking-oryk uppercase rounded-md transition-all ${mode === "preview" ? "bg-primary text-black font-bold shadow-[glow]" : "text-text-secondary hover:text-white"
                             }`}
                     >
-                        HYPERVIEW.MODE
+                        MODO.HIPERVIEW
                     </button>
                 </div>
 
@@ -76,7 +76,7 @@ export function PageEditorForm({ bookId, page, action }: Props) {
                                 <div className="grid grid-cols-[2fr_1fr] gap-6">
                                     <div className="space-y-3">
                                         <label className="font-mono text-[9px] uppercase tracking-oryk-wide text-text-secondary opacity-50 ml-1">
-                                            TRANSMISSION_SLUG
+                                            SLUG_DE_TRANSMISSÃO
                                         </label>
                                         <input
                                             name="slug"
@@ -89,7 +89,7 @@ export function PageEditorForm({ bookId, page, action }: Props) {
                                     </div>
                                     <div className="space-y-3">
                                         <label className="font-mono text-[9px] uppercase tracking-oryk-wide text-text-secondary opacity-50 ml-1">
-                                            SEQUENCE_INDEX
+                                            ÍNDICE_DE_SEQUÊNCIA
                                         </label>
                                         <input
                                             name="order_index"
@@ -109,7 +109,7 @@ export function PageEditorForm({ bookId, page, action }: Props) {
 
                                 <div className="space-y-4">
                                     <label className="font-mono text-[9px] uppercase tracking-oryk-wide text-text-secondary opacity-50 ml-1">
-                                        STRUCTURE_BLOCK_ARRAY
+                                        MATRIZ_DE_BLOCOS
                                     </label>
                                     <div className="border border-white/[0.04] rounded-xl bg-black/40 p-2 shadow-inner">
                                         <BlockEditor
@@ -122,7 +122,7 @@ export function PageEditorForm({ bookId, page, action }: Props) {
                         ) : (
                             <div className="space-y-8 animate-in fade-in duration-500">
                                 <header className="pb-8 border-b border-white/[0.06]">
-                                    <p className="font-mono text-[10px] text-primary uppercase tracking-[0.3em] mb-2">Protocol.Hyperview.Active</p>
+                                    <p className="font-mono text-[10px] text-primary uppercase tracking-[0.3em] mb-2">Protocolo.Hiperview.Ativo</p>
                                     <h1 className="text-3xl font-medium text-white tracking-tight">
                                         {slug.replace(/-/g, ' ').toUpperCase()}
                                     </h1>
@@ -141,7 +141,7 @@ export function PageEditorForm({ bookId, page, action }: Props) {
                                 type="submit"
                                 className="oryk-button-accent w-full py-5 text-[11px] uppercase font-bold tracking-oryk-wide"
                             >
-                                {page ? "UPLINK_SYNCHRONIZATION →" : "INIT_NEW_UNIT →"}
+                                {page ? "SINCRONIZAR_UPLINK →" : "INICIAR_NOVA_UNIDADE →"}
                             </button>
                         </div>
                     </form>
@@ -151,8 +151,8 @@ export function PageEditorForm({ bookId, page, action }: Props) {
             <div className="space-y-6 hidden lg:block">
                 <div className="flex items-center justify-between border-b border-white/[0.04] pb-6">
                     <div className="space-y-2">
-                        <h3 className="font-mono text-[9px] uppercase tracking-oryk-wide text-text-secondary opacity-50">REALTIME_UPLINK_MONITOR</h3>
-                        <p className="text-sm font-light text-white/40 italic">Live decryption preview</p>
+                        <h3 className="font-mono text-[9px] uppercase tracking-oryk-wide text-text-secondary opacity-50">MONITOR_UPLINK_TEMPOREAL</h3>
+                        <p className="text-sm font-light text-white/40 italic">Prévia de decriptação ao vivo</p>
                     </div>
                 </div>
                 <div className="oryk-surface p-10 min-h-[600px] border-white/[0.04] bg-black/[0.15]">

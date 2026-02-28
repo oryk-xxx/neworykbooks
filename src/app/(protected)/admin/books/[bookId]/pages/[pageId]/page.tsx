@@ -26,10 +26,10 @@ export default async function EditPage(props: {
           href={`/admin/books/${props.params.bookId}`}
           className="font-mono text-[9px] uppercase tracking-oryk-wide text-primary hover:opacity-70 transition-opacity flex items-center gap-2 mb-6"
         >
-          ← RETURN_TO_TRANSMISSION_INDEX
+          ← RETORNAR_AO_ÍNDICE_TRANSMISSÕES
         </Link>
-        <h1 className="font-mono text-[9px] uppercase tracking-oryk-wide text-text-secondary opacity-50">REPLACEMENT_UNIT_EDITOR</h1>
-        <p className="text-header text-white uppercase">Sync.Sequential_Unit</p>
+        <h1 className="font-mono text-[9px] uppercase tracking-oryk-wide text-text-secondary opacity-50">EDITOR_UNIDADE_SUBSTITUIÇÃO</h1>
+        <p className="text-header text-white uppercase">Sincronizar.Unidade_Sequencial</p>
       </div>
 
       <PageEditorForm
